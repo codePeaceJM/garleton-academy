@@ -1,0 +1,37 @@
+newstable:
+//网站首页的新闻信息
+id(int),
+newstype(varchar),
+//区分为普通新闻和图片轮转新闻，如果是图片轮转新闻必须要有图片
+columnname(varchar),
+//栏目名称
+title(varchar),
+contentabout(varchar),
+//内容大致分类
+content(text),
+//新闻的内容
+publisher(varchar),
+publishtime(varchar)
+//以yyyy-MM-dd HH:mm:ss为时间保存格式及前后台时间参数传递标准
+picture(file)
+
+advicetable:
+//通知公告显示的内容
+id(int),
+content(text),
+//通告的标题+内容，因为通告不需要提供查询功能
+publisher(varchar),
+publishtime(varchar),
+//以yyyy-MM-dd HH:mm:ss为时间保存格式及前后台时间参数传递标准
+
+friendlylinktable:
+id(int),
+linkcontent(varchar),
+reference(varchar),
+publisher(varchar),
+publishtime(varchar),
+//以yyyy-MM-dd HH:mm:ss为时间保存格式及前后台时间参数传递标准
+
+
+columntable:
+id(int),
