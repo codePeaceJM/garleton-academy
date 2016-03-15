@@ -1,0 +1,58 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="model.Paging" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE>
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'page.jsp' starting page</title>
+    
+	<meta charset="utf-8"/>
+
+  </head>
+  
+  <body>
+    <form method="post" action="TestAction!paging">
+    	<span style='font-size: 12px; font-weight: bold;'>
+    		<% 
+    			
+    			Paging page1 = (Paging)request.getAttribute("page");
+    		
+    			if(page1.isFirst()){
+    				out.print("首页   上一页");
+    			}else{
+    				out.print("<a href=\"TestAction!paging?cur_page="+page1.previous()+">上一页</a>");
+    			}
+    			
+    			if(page1.isLast()){
+    				out.print("下一页   尾页");
+    			}else{
+    				out.print("<a href=\"TestAction!paging?cur_page="+page1.next()+">下一页</a>");
+    			}
+    			
+    			out.print("共<b>"+page1.getRowCount()+"</b>条记录");
+    			out.print("转到<select onchange=\"location='TestAction!paging?cur_page='+this.options[this.selectedIndex].value;\">");
+    			
+    			for(int i = 1;i<page1.getPageCount();i++){
+    				if(i == page1.getCurPage()){
+    					out.println("<option value='"+i+"' selected>第"+i+"页</option>");
+    					
+    				}else{
+    					out.println("<option value='"+i+"'>第"+i+"页</option>");
+    					
+    				}
+    			
+    			}
+    			
+    			out.println("</select>");
+    		%>
+    	</span>
+    </form>
+  </body>
+</html>
