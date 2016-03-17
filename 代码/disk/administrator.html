@@ -5,39 +5,11 @@
 	<title><a href="">Garleton Academy</a></title>
 	<link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/index.css">
-	<link rel="stylesheet" href="../css/curtain.css">
+	<link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-	<div id="curtain">
 		
-		<div class="wrapper">
-			<form action="" id="sign_in_form">
-				
-				<input type="text" placeholder="用户名"><br/>
-				<input type="text" placeholder="密码"><br/>
-				<div><input type="submit" value="Sign In"></div>
-
-			</form>
-
-			<form action="" id="sign_up_form">
-					
-				<input type="text" placeholder="姓名" name="memberName"><br/>
-
-				<input type="password" placeholder="密码" name="password" id="first_pwd"><br/>
-				<input type="password" placeholder="重新输入密码" id="second_pwd"><br/>
-
-
-				<input type="text" name="address" placeholder="地址"><br/>
-				<input type="text" name="age" id="age" placeholder="年龄"><br/>
-				<label>male:<input type="radio" name="gender" value="male" ></label><br/>
-				<label>female:<input type="radio" name="gender" value="female" checked="checked"></label><br/>
-
-				<div><input type="submit" value="Sign Up"></div>
-
-			</form>
-		</div>
-
-	</div>
+		
 	<header id="header">
 		<div id="top_info"></div>
 		<div id="carousel">
@@ -91,9 +63,25 @@
 			</div>
 			<ul>
 				
-				<li><a href="" id="sign_in">Sign In</a></li>
-				<li><a href="" id="sign_up">Sign Up</a></li>
-
+				
+				<li>
+					<a class="manage" href="">用户管理</a>
+					<ul>
+						<li><a href="">查看用户</a></li>
+						<li><a href="">新增用户</a></li>
+						<li><a href="">删除用户</a></li>
+					</ul>
+				</li>
+				<li>
+					<a class="manage" href="" >机构管理</a>
+					<ul>
+						<li><a href="">查看机构</a></li>
+						<li><a href="">新增机构</a></li>
+						<li><a href="">删除机构</a></li>
+					</ul>
+				</li>
+				<li><a href="" id="log_out">Log Out</a></li>
+	
 			</ul>
 		</nav>
 	</header>
@@ -101,7 +89,17 @@
 		<article>
 			<header></header>
 			<div id="content">
-				
+				<ul style="display:none"> 
+					<s:iterator value="list" >
+						<li>
+							<span class="memberID"></span>
+							<span class="memberName"></span>
+							<span class="memberPosi"></span>
+							<span><a href="">修改</a></span>
+							<span><a href="">删除</a></span>
+						</li>
+					</s:iterator>
+				</ul>
 			</div>
 		</article>
 		<aside>
@@ -124,59 +122,6 @@
 	</footer>
 	<script src="../jquery-1.12.1.min.js"></script>
 	<script src="../bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
-	<script src="../js/curtain.js"></script>
-	<script>
-		var func_t = function(ev){
-			var form1 = document.getElementById('sign_in_form');
-			var form2 = document.getElementById('sign_up_form');
-
-			var pwd1 = document.getElementById('first_pwd');
-			var pwd2 = document.getElementById('second_pwd');
-
-			var aInput1 = form1.getElementsByTagName('input');
-			var aInput2 = form2.getElementsByTagName('input');
-
-			form1.querySelector('input[type="submit"]').onclick = function(ev){
-				ev.preventDefault();
-				for(i=0;i<aInput1.length;i++){
-					if(aInput1[i].value == ""){
-						alert("输入信息不完整");
-						return;
-					}
-				}
-
-				form1.submit();
-			}
-
-			form2.querySelector('input[type="submit"]').onclick = function(ev){
-				ev.preventDefault();
-				for(i=0;i<aInput2.length;i++){
-					if(aInput2[i].value == ""){
-						alert("输入信息不完整");
-						return;
-					}
-				}
-
-				if(!(pwd1.value == pwd2.value)){
-					alert("两次输入的密码不匹配");
-				}
-
-				form2.submit();
-			}
-
-		}
-
-		if(window.onload==null){
-
-			window.onload = func_t;
-		}else{
-			var func = window.onload;
-			window.onload = function(ev){
-				func(ev);
-				func_t(ev);
-			}
-		}
-
-	</script>
+	<script src="../js/admin.js"></script>
 </body>
 </html>
