@@ -32,6 +32,9 @@
 		<property name="mappingResources">
 			<list>
 				<value>entity/User.hbm.xml</value>
+				<value>entity/News.hbm.xml</value>
+				<value>entity/Column.hbm.xml</value>
+				<value>entity/Comment.hbm.xml</value>
 				<value>entity/Institution.hbm.xml</value>
 				<value>entity/District.hbm.xml</value></list>
 		</property></bean>
@@ -39,6 +42,37 @@
 		<property name="userService">
 			<ref bean="userService" />
 		</property>
+	</bean>
+	<bean id="districtAction" class="action.DistrictAction" scope="prototype"> 
+		<property name="districtService" ref="districtService"/> 
+	</bean>
+	<bean id="institutionAction" class="action.InstitutionAction" scope="prototype">
+		<property name="institutionService" ref="institutionService"/>
+	</bean>
+	<bean id="columnAction" class="action.ColumnAction" scope="prototype"> 
+		<property name="columnService" ref="columnService"/> 
+	</bean>
+	<bean id="newsAction" class="action.NewsAction" scope="prototype"> 
+		<property name="newsService" ref="newsService"/> 
+	</bean>
+	<bean id="commentAction" class="action.CommentAction" scope="prototype"> 
+		<property name="commentService" ref="commentService"/> 
+	</bean>
+	
+	<bean id="districtService" class="service.DistrictServiceImpl">
+		<property name="districtDAO" ref="districtDAO"/>
+	</bean>
+	<bean id="institutionService" class="service.InstitutionServiceImpl">
+		<property name="institutionDAO" ref="institutionDAO"/>
+	</bean>
+	<bean id="columnService" class="service.ColumnServiceImpl">
+		<property name="columnDAO" ref="columnDAO"/>
+	</bean>
+	<bean id="newsService" class="service.NewsServiceImpl">
+		<property name="newsDAO" ref="newsDAO"/>
+	</bean>
+	<bean id="commentService" class="service.CommentServiceImpl">
+		<property name="commentDAO" ref="commentDAO"/>
 	</bean>
 	<bean id="userService" class="service.UserServiceImpl">
 		<property name="userDAO">
@@ -56,6 +90,21 @@
 		</property>
 	</bean>
 	<bean id="districtDAO" class="dao.DistrictDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="newsDAO" class="dao.NewsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+		<bean id="columnDAO" class="dao.ColumnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+		<bean id="commentDAO" class="dao.CommentDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

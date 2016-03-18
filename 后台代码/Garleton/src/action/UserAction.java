@@ -51,12 +51,24 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 		return "log_fail";
 	}
 	public String search(){
-		return"";
+		if("".equals(user.getName())||user.getName()==null){
+			userList=userService.searchAll();
+		} else {
+			userList=userService.search(user.getName());
+		}
+		if(userList.isEmpty()){
+			return "search_user_fail";
+		} else {
+			return"search_user_success";
+		}
 	}
-	public String searchAll(){
-		return"";
+	public String del() {
+		if(userService.del(user.getId())){
+			return "del_user_success";
+		} else {
+			return "del_user_fail";
+		}
 	}
-	
 	public User getModel() {
 		// TODO Auto-generated method stub
 		return user;

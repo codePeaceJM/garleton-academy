@@ -22,6 +22,7 @@ import entity.User;
  */
 
 public class UserDAO extends HibernateDaoSupport {
+
 	private static final Logger log = LoggerFactory.getLogger(UserDAO.class);
 	// property constants
 	public static final String NAME = "name";
@@ -35,6 +36,7 @@ public class UserDAO extends HibernateDaoSupport {
 	public static final String COMMENT = "comment";
 	public static final String PHOTO = "photo";
 	public static final String STATUS = "status";
+	public static final String SEX = "sex";
 
 	protected void initDao() {
 		// do nothing
@@ -100,6 +102,7 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
+
 	public List findByName(Object name) {
 		return findByProperty(NAME, name);
 	}
@@ -142,6 +145,10 @@ public class UserDAO extends HibernateDaoSupport {
 
 	public List findByStatus(Object status) {
 		return findByProperty(STATUS, status);
+	}
+
+	public List findBySex(Object sex) {
+		return findByProperty(SEX, sex);
 	}
 
 	public List findAll() {
@@ -192,4 +199,5 @@ public class UserDAO extends HibernateDaoSupport {
 	public static UserDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (UserDAO) ctx.getBean("UserDAO");
 	}
+
 }

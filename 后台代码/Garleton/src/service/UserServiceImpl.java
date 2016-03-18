@@ -28,7 +28,12 @@ public class UserServiceImpl implements UserService {
 
 	public boolean del(int id) {
 		// TODO Auto-generated method stub
-		return false;
+		try{
+			userDAO.delete(userDAO.findById(id));
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
 	}
 
 	public boolean log(String name, String pwd) {
@@ -49,12 +54,14 @@ public class UserServiceImpl implements UserService {
 
 	public ArrayList<User> search(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		userList=(ArrayList<User>)userDAO.findByName(name);
+		return userList;
 	}
 
 	public ArrayList<User> searchAll() {
 		// TODO Auto-generated method stub
-		return null;
+		userList=(ArrayList<User>)userDAO.findAll();
+		return userList;
 	}
 	
 	private  boolean testLogName(String name) {

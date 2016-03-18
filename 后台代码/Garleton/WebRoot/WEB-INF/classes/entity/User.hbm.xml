@@ -43,5 +43,8 @@
         <property name="status" type="java.lang.String">
             <column name="STATUS" length="20" />
         </property>
+        <property name="sex" type="java.lang.String">
+            <column name="SEX" length="6" />
+        </property>
     </class>
 </hibernate-mapping>

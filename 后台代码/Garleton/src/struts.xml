@@ -5,6 +5,52 @@
 	<action name="userAction" class="userAction">
 		<result name="log_success">/MyJsp.jsp</result>
 		<result name="log_fail">/error.jsp</result>
+		<result name="search_user_success">/MyJsp.jsp</result>
+		<result name="search_user_fail">/error.jsp</result>
+		<result name="del_user_success">/MyJsp.jsp</result>
+		<result name="del_user_fail">/error.jsp</result>
+	</action>
+	<action name = "districtAction" class="districtAction">
+		<result name = "add_district_success">/index.jsp</result>
+		<result name = "add_district_fail">/index.jsp</result>
+		<result name = "del_district_success">/index.jsp</result>
+		<result name = "del_district_fail">/index.jsp</result>
+		<result name = "searchAll_district_success">/index.jsp</result>
+		<result name = "searchAll_district_fail">/index.jsp</result>	
+	</action>
+	<action name="institutionAction" class="institutionAction">
+		<result name = "add_institution_success">/index.jsp</result>
+		<result name = "add_institution_fail">/index.jsp</result>
+		<result name = "del_institution_success">/index.jsp</result>
+		<result name = "del_institution_fail">/index.jsp</result>
+		<result name = "searchAll_institution_success">/index.jsp</result>
+		<result name = "searchAll_institution_fail">/index.jsp</result>
+	</action>
+	<action name = "columnAction" class="columnAction">
+		<result name = "add_column_success">/index.jsp</result>
+		<result name = "add_column_fail">/index.jsp</result>
+		<result name = "del_column_success">/index.jsp</result>
+		<result name = "del_column_fail">/index.jsp</result>
+		<result name = "searchAll_column_success">/index.jsp</result>
+		<result name = "searchAll_column_fail">/index.jsp</result>
+		<result name = "update_column_success">/index.jsp</result>
+		<result name = "update_column_fail">/index.jsp</result>
+	</action>
+	<action name = "newsAction" class="newsAction">
+		<result name = "add_news_success">/index.jsp</result>
+		<result name = "add_news_fail">/index.jsp</result>
+		<result name = "del_news_success">/index.jsp</result>
+		<result name = "del_news_fail">/index.jsp</result>
+		<result name = "searchAll_news_success">/index.jsp</result>
+		<result name = "searchAll_news_fail">/index.jsp</result>
+		<result name = "update_news_success">/index.jsp</result>
+		<result name = "update_news_fail">/index.jsp</result>
+	</action>
+	<action name = "commentAction" class="commentAction">
+		<result name = "add_comment_success">/index.jsp</result>
+		<result name = "add_comment_fail">/index.jsp</result>
+		<result name = "del_comment_success">/index.jsp</result>
+		<result name = "del_comment_fail">/index.jsp</result>
 	</action>
 </package>
 </struts>    

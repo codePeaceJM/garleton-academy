@@ -2,6 +2,8 @@ package dao;
 
 import java.util.List;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -43,25 +45,33 @@ public class InstitutionDAO extends HibernateDaoSupport {
 	}
 
 	public void save(Institution transientInstance) {
-		log.debug("saving Institution instance");
-		try {
-			getHibernateTemplate().save(transientInstance);
-			log.debug("save successful");
-		} catch (RuntimeException re) {
-			log.error("save failed", re);
-			throw re;
-		}
+//		log.debug("saving Institution instance");
+//		try {
+//			getHibernateTemplate().save(transientInstance);
+//			log.debug("save successful");
+//		} catch (RuntimeException re) {
+//			log.error("save failed", re);
+//			throw re;
+//		}
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		session.save(transientInstance);
+		tx.commit();
 	}
 
 	public void delete(Institution persistentInstance) {
-		log.debug("deleting Institution instance");
-		try {
-			getHibernateTemplate().delete(persistentInstance);
-			log.debug("delete successful");
-		} catch (RuntimeException re) {
-			log.error("delete failed", re);
-			throw re;
-		}
+//		log.debug("deleting Institution instance");
+//		try {
+//			getHibernateTemplate().delete(persistentInstance);
+//			log.debug("delete successful");
+//		} catch (RuntimeException re) {
+//			log.error("delete failed", re);
+//			throw re;
+//		}
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		session.delete(persistentInstance);
+		tx.commit();
 	}
 
 	public Institution findById(java.lang.Integer id) {
