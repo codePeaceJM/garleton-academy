@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 				<label>照片:</label>
 				
-				<input type="file" name="photo"/><br/>
+				<input type="file" name="file"/><br/>
 				
 					
 				<input type="text" placeholder="姓名" name="name"><br/>
@@ -38,18 +38,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="password" placeholder="密码" name="pwd" id="first_pwd"><br/>
 				<input type="password" placeholder="重新输入密码" id="second_pwd"><br/>
 
-				<label>男:<input type="radio" name="sex" value="male" ></label><br/>
-				<label>女:<input type="radio" name="sex" value="female" checked="checked"></label><br/>
+				<label>男<input type="radio" name="sex" value="male" ></label>
+				<label>女<input type="radio" name="sex" value="female" checked="checked"></label><br/>
 				
 
 				
-				<input type="text" name="address" placeholder="学院" name="unit" ><br/>
-				<input type="text" name="address" placeholder="电话" name="tel" ><br/>
-				<input type="text" name="address" placeholder="手机" name="cel" ><br/>
+				<input type="text" placeholder="单位" name="unit" ><br/>
+				<input type="text" placeholder="电话" name="tel" ><br/>
+				<input type="text" placeholder="手机" name="cel" ><br/>
 				
 				
 				
-				<input type="text" name="age" id="age" placeholder="邮箱" name="email"><br/>
+				<input type="text" placeholder="邮箱" name="email"><br/>
 				
 				
 				<div><input type="submit" value="Sign Up"></div>
