@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		if (testLogName(u.getName())) {
 			userDAO.save(u);
+			return true;
 		} 
 		return false;
 	}
