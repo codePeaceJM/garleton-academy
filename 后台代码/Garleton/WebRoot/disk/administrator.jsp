@@ -1,11 +1,19 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title><a href="">Garleton Academy</a></title>
-	<link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/index.css">
-	<link rel="stylesheet" href="../css/admin.css">
+	<link rel="stylesheet" href="/Garleton/bootstrap3.3.6/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/Garleton/css/index.css">
+	<link rel="stylesheet" href="/Garleton/css/admin.css">
+
 </head>
 <body>
 		
@@ -26,21 +34,21 @@
 			    <div class="item active">
 			      <img src="../img/scope2.jpg" alt="...">
 			      <div class="carousel-caption">
-			        <h2>����Ϣ</h2>
+			        <h2>红利息</h2>
 			      </div>
 			    </div>
 			    <div class="item">
 			      <img src="../img/scope4.jpg" alt="..." >
 			      <div class="carousel-caption">
-			        <h2>������</h2>
-			        <p>������Ҳ������ѽ</p>
+			        <h2>胡光延</h2>
+			        <p>胡光延也不容易呀</p>
 			      </div>
 			    </div>
 			    <div class="item">
 			      <img src="../img/scope5.jpg" alt="..." >
 			      <div class="carousel-caption">
-			        <h2>�ʻ�</h2>
-			        <p>�Ҿ��û���˵Щ���õıȽϺ�</p>
+			        <h2>肥货</h2>
+			        <p>我觉得还是说些有用的比较好</p>
 			      </div>
 			    </div>
 			    ...
@@ -65,19 +73,19 @@
 				
 				
 				<li>
-					<a class="manage" href="">�û�����</a>
+					<a class="manage" href="">用户管理</a>
 					<ul>
-						<li><a href="">�鿴�û�</a></li>
-						<li><a href="">�����û�</a></li>
-						<li><a href="">ɾ���û�</a></li>
+						<li><a href="">查看用户</a></li>
+						<li><a href="">新增用户</a></li>
+						<li><a href="">删除用户</a></li>
 					</ul>
 				</li>
 				<li>
-					<a class="manage" href="" >��������</a>
+					<a class="manage" href="" >机构管理</a>
 					<ul>
-						<li><a href="">�鿴����</a></li>
-						<li><a href="">��������</a></li>
-						<li><a href="">ɾ������</a></li>
+						<li><a href="">查看机构</a></li>
+						<li><a href="">新增机构</a></li>
+						<li><a href="">删除机构</a></li>
 					</ul>
 				</li>
 				<li><a href="" id="log_out">Log Out</a></li>
@@ -95,8 +103,8 @@
 							<span class="memberID"></span>
 							<span class="memberName"></span>
 							<span class="memberPosi"></span>
-							<span><a href="">�޸�</a></span>
-							<span><a href="">ɾ��</a></span>
+							<span><a href="">修改</a></span>
+							<span><a href="">删除</a></span>
 						</li>
 					</s:iterator>
 				</ul>
@@ -112,16 +120,16 @@
 			
 			<address>
 				<ul>
-					<li><span>��ϵ�绰��<a href="">15950570536</a></span></li>
-					<li><span>��ַ��<a href="">�Ͼ���ѧ��԰4��</a></span></li>
-					<li><span>���䣺<a href="">ybbdaidai@126.com</a></span></li>
+					<li><span>联系电话：<a href="">15950570536</a></span></li>
+					<li><span>地址：<a href="">南京大学南园4舍</a></span></li>
+					<li><span>邮箱：<a href="">ybbdaidai@126.com</a></span></li>
 				</ul>
 			</address>	
 
 		</div>
 	</footer>
-	<script src="../jquery-1.12.1.min.js"></script>
-	<script src="../bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
-	<script src="../js/admin.js"></script>
+	<script src="/Garleton/jquery.1.12.1-min.js"></script>
+	<script src="/Garleton/bootstrap3.3.6/dist/js/bootstrap.min.js"></script>
+	<script src="/Garleton/js/admin.js"></script>
 </body>
 </html>
