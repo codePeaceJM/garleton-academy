@@ -1,14 +1,21 @@
 package action;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import service.FileServiceImpl;
 import service.UserService;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -87,6 +94,15 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 		if(userList.isEmpty()){
 			return "search_user_fail";
 		} else {
+			JSONArray jsonArray =  JSONArray.fromObject(userList);
+			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
+			response.setCharacterEncoding("UTF-8"); 
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return"search_user_success";
 		}
 	}
