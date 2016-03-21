@@ -1,11 +1,18 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 <head>
+	<base href="<%=basePath%>">
+	
 	<meta charset="UTF-8">
 	<title><a href="">Garleton Academy</a></title>
-	<link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/index.css">
-	<link rel="stylesheet" href="../css/curtain.css">
+	<link rel="stylesheet" href="/Garleton/bootstrap3.3.6/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/Garleton/css/index.css">
+	<link rel="stylesheet" href="/Garleton/css/curtain.css">
 </head>
 <body>
 	<div id="curtain">
@@ -52,20 +59,20 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" role="listbox">
 			    <div class="item active">
-			      <img src="../img/scope2.jpg" alt="...">
+			      <img src="/Garleton/img/scope2.jpg" alt="...">
 			      <div class="carousel-caption">
 			        <h2>红利息</h2>
 			      </div>
 			    </div>
 			    <div class="item">
-			      <img src="../img/scope4.jpg" alt="..." >
+			      <img src="/Garleton/img/scope4.jpg" alt="..." >
 			      <div class="carousel-caption">
 			        <h2>胡光延</h2>
 			        <p>胡光延也不容易呀</p>
 			      </div>
 			    </div>
 			    <div class="item">
-			      <img src="../img/scope5.jpg" alt="..." >
+			      <img src="/Garleton/img/scope5.jpg" alt="..." >
 			      <div class="carousel-caption">
 			        <h2>肥货</h2>
 			        <p>我觉得还是说些有用的比较好</p>
@@ -122,9 +129,9 @@
 
 		</div>
 	</footer>
-	<script src="../jquery-1.12.1.min.js"></script>
-	<script src="../bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
-	<script src="../js/curtain.js"></script>
+	<script src="/Garleton/jquery.1.12.1-min.js"></script>
+	<script src="/Garleton/bootstrap3.3.6/dist/js/bootstrap.min.js"></script>
+	<script src="/Garleton/js/curtain.js"></script>
 	<script>
 		var func_t = function(ev){
 			var form1 = document.getElementById('sign_in_form');

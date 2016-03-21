@@ -1,0 +1,18 @@
+/*  */
+#nav_bar ul li {
+	position:relative;
+}
+
+#nav_bar ul li ul {
+	padding-top:24px;
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	display:none;
+}
+
+
+#nav_bar ul li ul li:last-of-type {
+	padding-right:0;
+}
