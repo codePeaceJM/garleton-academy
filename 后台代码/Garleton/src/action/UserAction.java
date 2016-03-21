@@ -69,6 +69,13 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 			return "del_user_fail";
 		}
 	}
+	public String reg() {
+		if(userService.reg(user)){
+			return "reg_success";
+		} else {
+			return "reg_fail";
+		}
+	}
 	public User getModel() {
 		// TODO Auto-generated method stub
 		return user;

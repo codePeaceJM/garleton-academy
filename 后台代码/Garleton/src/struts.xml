@@ -9,6 +9,8 @@
 		<result name="search_user_fail">/error.jsp</result>
 		<result name="del_user_success">/MyJsp.jsp</result>
 		<result name="del_user_fail">/error.jsp</result>
+		<result name="reg_success">/MyJsp.jsp</result>
+		<result name="reg_fail">/error.jsp</result>
 	</action>
 	<action name = "districtAction" class="districtAction">
 		<result name = "add_district_success">/index.jsp</result>

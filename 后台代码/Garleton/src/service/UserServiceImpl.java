@@ -49,6 +49,9 @@ public class UserServiceImpl implements UserService {
 
 	public boolean reg(User u) {
 		// TODO Auto-generated method stub
+		if (testLogName(u.getName())) {
+			userDAO.save(u);
+		} 
 		return false;
 	}
 
