@@ -37,8 +37,13 @@
 #sign_up_form {
 	color: #fff;
 	display:none;
-	margin-top:220px;
+	margin-top:160px;
 	text-align: left;
+}
+
+
+input[type="file"] {
+	width:160px;
 }
 
 #curtain form div {

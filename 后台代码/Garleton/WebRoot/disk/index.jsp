@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="curtain">
 		
 		<div class="wrapper">
-			<form action="userAction!log" id="sign_in_form">
+			<form method="post" action="userAction!log" id="sign_in_form">
 				
 				<input type="text" placeholder="用户名" name="name"><br/>
 				<input type="text" placeholder="密码" name="pwd"><br/>
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			</form>
 
-			<form id="sign_up_form" action="userAction!reg" enctype="multipart/form-data">
+			<form method="post" id="sign_up_form" action="userAction!reg" enctype="multipart/form-data">
 					
 				<label>照片:</label>
 				
@@ -43,7 +43,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 
 				
+<<<<<<< HEAD
+				<input type="text" placeholder="学院" name="unit" ><br/>
+=======
 				<input type="text" placeholder="单位" name="unit" ><br/>
+>>>>>>> origin/master
 				<input type="text" placeholder="电话" name="tel" ><br/>
 				<input type="text" placeholder="手机" name="cel" ><br/>
 				
@@ -144,59 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</footer>
 	<script src="/Garleton/jquery.1.12.1-min.js"></script>
 	<script src="/Garleton/bootstrap3.3.6/dist/js/bootstrap.min.js"></script>
-	<script src="/Garleton/js/curtain.js"></script>
-	<script>
-		var func_t = function(ev){
-			var form1 = document.getElementById('sign_in_form');
-			var form2 = document.getElementById('sign_up_form');
-
-			var pwd1 = document.getElementById('first_pwd');
-			var pwd2 = document.getElementById('second_pwd');
-
-			var aInput1 = form1.getElementsByTagName('input');
-			var aInput2 = form2.getElementsByTagName('input');
-
-			form1.querySelector('input[type="submit"]').onclick = function(ev){
-				ev.preventDefault();
-				for(i=0;i<aInput1.length;i++){
-					if(aInput1[i].value == ""){
-						alert("输入信息不完整");
-						return;
-					}
-				}
-
-				form1.submit();
-			}
-
-			form2.querySelector('input[type="submit"]').onclick = function(ev){
-				ev.preventDefault();
-				for(i=0;i<aInput2.length;i++){
-					if(aInput2[i].value == ""){
-						alert("输入信息不完整");
-						return;
-					}
-				}
-
-				if(!(pwd1.value == pwd2.value)){
-					alert("两次输入的密码不匹配");
-				}
-
-				form2.submit();
-			}
-
-		}
-
-		if(window.onload==null){
-
-			window.onload = func_t;
-		}else{
-			var func = window.onload;
-			window.onload = function(ev){
-				func(ev);
-				func_t(ev);
-			}
-		}
-
-	</script>
+	<script src="/Garleton/js/util/util.js" ></script>
+	<script src="/Garleton/js/index.js"></script>
 </body>
 </html>

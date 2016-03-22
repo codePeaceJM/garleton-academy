@@ -74,18 +74,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				<li>
 					<a class="manage" href="">用户管理</a>
-					<ul>
-						<li><a href="">查看用户</a></li>
-						<li><a href="">新增用户</a></li>
-						<li><a href="">删除用户</a></li>
+					<ul id="userAction"> 
+						<li><a href="" class="query">查看用户</a></li>
+						<li><a href="" class="delete">删除用户</a></li>
 					</ul>
 				</li>
 				<li>
 					<a class="manage" href="" >机构管理</a>
-					<ul>
-						<li><a href="">查看机构</a></li>
-						<li><a href="">新增机构</a></li>
-						<li><a href="">删除机构</a></li>
+					<ul id="institutionAction">
+						<li><a href="" class="query">查看机构</a></li>
+						<li><a href="" class="add">新增机构</a></li>
+						<li><a href="" class="delete">删除机构</a></li>
 					</ul>
 				</li>
 				<li><a href="" id="log_out">Log Out</a></li>
@@ -94,20 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</nav>
 	</header>
 	<div id="wrapper">
-		<article>
+		<article id="main_block">
 			<header></header>
 			<div id="content">
-				<ul style="display:none"> 
-					<s:iterator value="list" >
-						<li>
-							<span class="memberID"></span>
-							<span class="memberName"></span>
-							<span class="memberPosi"></span>
-							<span><a href="">修改</a></span>
-							<span><a href="">删除</a></span>
-						</li>
-					</s:iterator>
-				</ul>
+				
 			</div>
 		</article>
 		<aside>
@@ -130,6 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</footer>
 	<script src="/Garleton/jquery.1.12.1-min.js"></script>
 	<script src="/Garleton/bootstrap3.3.6/dist/js/bootstrap.min.js"></script>
+	<script src="/Garleton/js/util/util.js"></script>
 	<script src="/Garleton/js/admin.js"></script>
 </body>
 </html>
