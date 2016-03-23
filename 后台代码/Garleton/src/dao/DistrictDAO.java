@@ -37,18 +37,31 @@ public class DistrictDAO extends HibernateDaoSupport {
 	}
 
 	public void save(District transientInstance) {
-//		log.debug("saving District instance");
-//		try {
-//			getHibernateTemplate().save(transientInstance);
-//			log.debug("save successful");
-//		} catch (RuntimeException re) {
-//			log.error("save failed", re);
-//			throw re;
+
+		log.debug("saving District instance");
+		try {
+			getHibernateTemplate().save(transientInstance);
+			log.debug("save successful");
+		} catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
+//		System.out.println("1");
+//		Session session = getSession();
+//		System.out.println("2");
+//		Transaction tx = session.beginTransaction();
+//		System.out.println("3"+transientInstance.getName());
+//		try{
+//			session.save(transientInstance);
+//		}catch( Exception e){
+//			System.out.println("hu");
+//			e.printStackTrace();
 //		}
-		Session session = getSession();
-		Transaction tx = session.beginTransaction();
-		session.save(transientInstance);
-		tx.commit();
+//		
+//		System.out.println("4");
+//		tx.commit();
+//		System.out.println("add"+transientInstance.getName());
+		
 	}
 
 	public void delete(District persistentInstance) {

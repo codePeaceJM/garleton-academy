@@ -17,8 +17,10 @@ public class DistrictServiceImpl implements DistrictService {
 
 	public boolean add(District d) {
 		// TODO Auto-generated method stub
+		
 		try{
 			districtDAO.save(d);
+			
 		}catch(Exception e){
 			return false;
 		}
@@ -41,6 +43,11 @@ public class DistrictServiceImpl implements DistrictService {
 	public ArrayList<District> searchAll() {
 		// TODO Auto-generated method stub
 		return districtList = (ArrayList<District>) districtDAO.findAll();		
+	}
+
+	public ArrayList<District> search(String name) {
+		// TODO Auto-generated method stub
+		return districtList = (ArrayList<District>) districtDAO.findByName(name);
 	}
 
 }

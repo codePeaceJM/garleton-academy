@@ -39,11 +39,15 @@ public class DistrictAction extends ActionSupport implements ModelDriven<Distric
 	}
 	
 	public String add(){
-		if(districtService.add(district))
+		
+		if(districtService.add(district)){
+			
 			return "add_district_success";
+		}
 		else
 			return "add_district_fail";
 	}
+	
 	public String del(){
 		if(districtService.del(district.getId()))
 			return "del_district_success";
@@ -51,9 +55,13 @@ public class DistrictAction extends ActionSupport implements ModelDriven<Distric
 			return "del_district_fail";
 	}
 	
-	public String searchAll(){
+	public String search(){
 		
-		districtList=districtService.searchAll();
+		if("".equals(district.getName())||district.getName()==null){
+			districtList=districtService.searchAll();
+		} else {
+			districtList=districtService.search(district.getName());
+		}
 		JSONArray jsonArray =  JSONArray.fromObject(districtList);
 		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
 		response.setCharacterEncoding("UTF-8"); 
@@ -63,7 +71,13 @@ public class DistrictAction extends ActionSupport implements ModelDriven<Distric
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "searchAll_district_success";
+		if(districtList.isEmpty()){
+			return "search_district_fail";
+		} else {
+			return "search_district_success";
+		}
+		
+		
 		
 	}
 	

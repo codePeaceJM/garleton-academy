@@ -1,7 +1,15 @@
 package action;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -52,14 +60,29 @@ public class ColumnAction extends ActionSupport implements ModelDriven<Column>{
 		else
 			return "del_column_fail";
 	}
-	public String searchAll(){
-		
-		columnList=columnService.searchAll();
-		return "searchAll_column_success";
-		
+	public String search(){
+		if("".equals(column.getName())||column.getName()==null){
+			columnList=columnService.searchAll();
+		}else{
+			columnList=columnService.search(column.getName());
+		}
+		if(columnList.isEmpty()){
+			return "search_column_fail";
+		}else{
+			JSONArray jsonArray =  JSONArray.fromObject(columnList);
+			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
+			response.setCharacterEncoding("UTF-8"); 
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "search_column_success";
+		}
 	}
 	public String update(){
-		System.out.println("add1"+column.getId());
+		
 		if(columnService.update(column)){
 			return "update_column_success";
 		}else{

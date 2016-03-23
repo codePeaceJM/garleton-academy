@@ -46,4 +46,9 @@ public class InstitutionServiceImpl implements InstitutionService {
 		return institutionList = (ArrayList<Institution>) institutionDAO.findAll();
 	}
 
+	public ArrayList<Institution> search(String name) {
+		// TODO Auto-generated method stub
+		return institutionList = (ArrayList<Institution>) institutionDAO.findByName(name);
+	}
+
 }

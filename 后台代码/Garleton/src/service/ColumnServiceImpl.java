@@ -47,12 +47,16 @@ public class ColumnServiceImpl implements ColumnService {
 	public boolean update(Column c) {
 		// TODO Auto-generated method stub
 		try{
-			System.out.println("add2 "+c.getId());
 			columnDAO.update(c);
 		}catch(Exception e){
 			return false;
 		}
 		return true;		
+	}
+
+	public ArrayList<Column> search(String name) {
+		// TODO Auto-generated method stub
+		return columnList = (ArrayList<Column>) columnDAO.findByName(name);
 	}
 
 }

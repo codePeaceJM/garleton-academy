@@ -1,9 +1,17 @@
 package action;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+
+import org.apache.struts2.ServletActionContext;
 
 import service.NewsService;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -38,9 +46,27 @@ public class NewsAction extends ActionSupport implements ModelDriven<News>{
 		}
 		
 	}
-	public String searchAll(){
-		newsList = newsService.searchAll();
-		return "searchAll_news_success";
+	public String search(){
+		if("".equals(news.getTitle())||news.getTitle()==null){
+			newsList = newsService.searchAll();
+		}else{
+			newsList = newsService.search(news.getTitle());
+		}
+		if(newsList.isEmpty()){
+			return "search_news_fail";
+		}else{
+			JSONArray jsonArray =  JSONArray.fromObject(newsList);
+			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
+			response.setCharacterEncoding("UTF-8"); 
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "search_news_success";
+		}
+		
 		
 	}
 	public NewsService getNewsService() {

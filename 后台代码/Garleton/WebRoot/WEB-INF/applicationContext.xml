@@ -36,7 +36,15 @@
 				<value>entity/Column.hbm.xml</value>
 				<value>entity/Comment.hbm.xml</value>
 				<value>entity/Institution.hbm.xml</value>
-				<value>entity/District.hbm.xml</value></list>
+				<value>entity/District.hbm.xml</value>
+				<value>entity/Cases.hbm.xml</value>
+				<value>entity/Resource.hbm.xml</value>
+				<value>entity/Knowledge.hbm.xml</value>
+				<value>entity/Statute.hbm.xml</value>
+				<value>entity/Course.hbm.xml</value>
+				<value>entity/Question.hbm.xml</value>
+				<value>entity/Paper.hbm.xml</value>
+				<value>entity/Expert.hbm.xml</value></list>
 		</property></bean>
 	<bean id="userAction" class="action.UserAction">
 		<property name="userService">
@@ -58,7 +66,31 @@
 	<bean id="commentAction" class="action.CommentAction" scope="prototype"> 
 		<property name="commentService" ref="commentService"/> 
 	</bean>
-	
+	<bean id="casesAction" class="action.CasesAction" scope="prototype">
+		<property name="casesService" ref="casesService" />
+	</bean>
+	<bean id="resourceAction" class="action.ResourceAction" scope="prototype">
+		<property name="resourceService" ref="resourceService" />
+	</bean>
+	<bean id="knowledgeAction" class="action.KnowledgeAction" scope="prototype">
+		<property name="knowledgeService" ref="knowledgeService" />
+	</bean>
+	<bean id="statuteAction" class="action.StatuteAction" scope="prototype">
+		<property name="statuteService" ref="statuteService" />
+	</bean>
+	<bean id="courseAction" class="action.CourseAction" scope="prototype">
+		<property name="courseService" ref="courseService" />
+	</bean>
+	<bean id="questionAction" class="action.QuestionAction" scope="prototype">
+		<property name="questionService" ref="questionService" />
+	</bean>
+	<bean id="paperAction" class="action.PaperAction" scope="prototype">
+		<property name="paperService" ref="paperService" />
+	</bean>
+	<bean id="expertAction" class="action.ExpertAction" scope="prototype">
+		<property name="expertService" ref="expertService" />
+	</bean>
+	<bean id="fileService" class="service.FileServiceImpl"/>
 	<bean id="districtService" class="service.DistrictServiceImpl">
 		<property name="districtDAO" ref="districtDAO"/>
 	</bean>
@@ -73,6 +105,30 @@
 	</bean>
 	<bean id="commentService" class="service.CommentServiceImpl">
 		<property name="commentDAO" ref="commentDAO"/>
+	</bean>
+	<bean id="casesService" class="service.CasesServiceImpl">
+		<property name="casesDAO" ref="casesDAO" />
+	</bean>
+	<bean id="resourceService" class="service.ResourceServiceImpl">
+		<property name="resourceDAO" ref="resourceDAO" />
+	</bean>
+	<bean id="knowledgeService" class="service.KnowledgeServiceImpl">
+		<property name="knowledgeDAO" ref="knowledgeDAO" />
+	</bean>
+	<bean id="statuteService" class="service.StatuteServiceImpl">
+		<property name="statuteDAO" ref="statuteDAO" />
+	</bean>
+	<bean id="courseService" class="service.CourseServiceImpl">
+		<property name="courseDAO" ref="courseDAO" />
+	</bean>
+	<bean id="questionService" class="service.QuestionServiceImpl">
+		<property name="questionDAO" ref="questionDAO" />
+	</bean>
+	<bean id="paperService" class="service.PaperServiceImpl">
+		<property name="paperDAO" ref="paperDAO" />
+	</bean>
+	<bean id="expertService" class="service.ExpertServiceImpl">
+		<property name="expertDAO" ref="expertDAO" />
 	</bean>
 	<bean id="userService" class="service.UserServiceImpl">
 		<property name="userDAO">
@@ -105,6 +161,46 @@
 		</property>
 	</bean>
 		<bean id="commentDAO" class="dao.CommentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="casesDAO" class="dao.CasesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="resourceDAO" class="dao.ResourceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="knowledgeDAO" class="dao.KnowledgeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="statuteDAO" class="dao.StatuteDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="courseDAO" class="dao.CourseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="questionDAO" class="dao.QuestionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="paperDAO" class="dao.PaperDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="expertDAO" class="dao.ExpertDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

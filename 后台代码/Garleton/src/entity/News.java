@@ -1,115 +1,127 @@
 package entity;
 
+
+
 /**
  * News entity. @author MyEclipse Persistence Tools
  */
 
-public class News implements java.io.Serializable {
+public class News  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer id;
-	private String newstype;
-	private String columnName;
-	private String title;
-	private String contentAbout;
-	private String content;
-	private String publisher;
-	private String publishTime;
-	private String picture;
+    // Fields    
 
-	// Constructors
+     private Integer id;
+     private String newstype;
+     private String columnName;
+     private String title;
+     private String contentAbout;
+     private String content;
+     private String publisher;
+     private String publishTime;
+     private String picture;
 
-	/** default constructor */
-	public News() {
-	}
 
-	/** full constructor */
-	public News(String newstype, String columnName, String title,
-			String contentAbout, String content, String publisher,
-			String publishTime, String picture) {
-		this.newstype = newstype;
-		this.columnName = columnName;
-		this.title = title;
-		this.contentAbout = contentAbout;
-		this.content = content;
-		this.publisher = publisher;
-		this.publishTime = publishTime;
-		this.picture = picture;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public News() {
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    
+    /** full constructor */
+    public News(String newstype, String columnName, String title, String contentAbout, String content, String publisher, String publishTime, String picture) {
+        this.newstype = newstype;
+        this.columnName = columnName;
+        this.title = title;
+        this.contentAbout = contentAbout;
+        this.content = content;
+        this.publisher = publisher;
+        this.publishTime = publishTime;
+        this.picture = picture;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+   
+    // Property accessors
 
-	public String getNewstype() {
-		return this.newstype;
-	}
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setNewstype(String newstype) {
-		this.newstype = newstype;
-	}
+    public String getNewstype() {
+        return this.newstype;
+    }
+    
+    public void setNewstype(String newstype) {
+        this.newstype = newstype;
+    }
 
-	public String getColumnName() {
-		return this.columnName;
-	}
+    public String getColumnName() {
+        return this.columnName;
+    }
+    
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
 
-	public void setColumnName(String columnName) {
-		this.columnName = columnName;
-	}
+    public String getTitle() {
+        return this.title;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public String getContentAbout() {
+        return this.contentAbout;
+    }
+    
+    public void setContentAbout(String contentAbout) {
+        this.contentAbout = contentAbout;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getContent() {
+        return this.content;
+    }
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getContentAbout() {
-		return this.contentAbout;
-	}
+    public String getPublisher() {
+        return this.publisher;
+    }
+    
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-	public void setContentAbout(String contentAbout) {
-		this.contentAbout = contentAbout;
-	}
+    public String getPublishTime() {
+        return this.publishTime;
+    }
+    
+    public void setPublishTime(String publishTime) {
+        this.publishTime = publishTime;
+    }
 
-	public String getContent() {
-		return this.content;
-	}
+    public String getPicture() {
+        return this.picture;
+    }
+    
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+   
 
-	public void setContent(String content) {
-		this.content = content;
-	}
 
-	public String getPublisher() {
-		return this.publisher;
-	}
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
 
-	public String getPublishTime() {
-		return this.publishTime;
-	}
 
-	public void setPublishTime(String publishTime) {
-		this.publishTime = publishTime;
-	}
 
-	public String getPicture() {
-		return this.picture;
-	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
 
 }

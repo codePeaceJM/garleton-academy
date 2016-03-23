@@ -52,7 +52,12 @@ public class NewsServiceImpl implements NewsService {
 		// TODO Auto-generated method stub
 		return newsList=(ArrayList<News>) newsDAO.findAll();
 	}
-
+	
+	public ArrayList<News> search(String title) {
+		// TODO Auto-generated method stub
+		return newsList=(ArrayList<News>) newsDAO.findByTitle(title);
+	
+	}
 	public boolean update(News n) {
 		// TODO Auto-generated method stub
 		try{
@@ -61,6 +66,8 @@ public class NewsServiceImpl implements NewsService {
 			return false;
 		}
 		return true;
+
+
 	}
 
 }
