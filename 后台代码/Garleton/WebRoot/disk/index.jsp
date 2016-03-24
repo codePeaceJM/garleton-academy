@@ -13,6 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Garleton/bootstrap3.3.6/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/Garleton/css/index.css">
 	<link rel="stylesheet" href="/Garleton/css/curtain.css">
+	<link rel="stylesheet" href="/Garleton/css/myBreadcrumb.css">
+	<link rel="stylesheet" href="/Garleton/css/search_icon.css"/>
 </head>
 <body>
 	<div id="curtain">
@@ -40,14 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<label>男<input type="radio" name="sex" value="male" ></label>
 				<label>女<input type="radio" name="sex" value="female" checked="checked"></label><br/>
-				
 
-				
-<<<<<<< HEAD
 				<input type="text" placeholder="学院" name="unit" ><br/>
-=======
 				<input type="text" placeholder="单位" name="unit" ><br/>
->>>>>>> origin/master
 				<input type="text" placeholder="电话" name="tel" ><br/>
 				<input type="text" placeholder="手机" name="cel" ><br/>
 				
@@ -113,7 +110,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="logo">
 				Garleton Academy
 			</div>
-			<ul>
+				<ul class="myBreadcrumb">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Vehicles</a></li>
+				<li><a href="#">Vans</a></li>
+				<li><a href="#">Camper Vans</a></li>
+			</ul>
+			
+			<div class="search">
+			
+				<div class="category">
+					
+					<a href="" class="search_rule">类别</a>
+					<ul>
+						<li><a href="">文章名</a></li>
+						<li><a href="">时间</a></li>
+						<li><a href="">发布人</a></li>
+					</ul>	
+				</div>
+			
+				<input type="text" placeholder="支持模糊匹配" id="search_bar"/>
+				
+				<div class="icon"><a></a></div>
+			</div>
+			
+			<ul class="sign">
 				
 				<li><a href="" id="sign_in">Sign In</a></li>
 				<li><a href="" id="sign_up">Sign Up</a></li>
@@ -125,6 +146,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<article>
 			<header></header>
 			<div id="content">
+				
+				<div>这家餐厅在一周之前就接到通知，以做好迎接准备。德国驻华大使馆先提前点菜，菜单选好后发至柏林得到确认后，方才下单。
+
+今天上午，餐厅的店长南先生介绍，自高克总统来了之后，很多市民都慕名来到店里，专门挑高克吃过的菜点，比如脆瓜安格斯牛柳粒 、抓炒明虾。
+
+因此，餐厅打算明日推出总统套餐，里面包括高克总统品尝过的菜品，整个套餐可供市民自由选择，不需要全套点餐，价格是按照菜的单价来叠加的。</div>
+				<div>高克并非第一个在簋街吃饭的外国首脑。意大利总理伦齐、瑞士联邦主席毛雷尔等外国政要也曾光临过簋街。
+
+昨天下午，德国驻华大使馆新闻处负责人告诉记者，选择这家餐厅的原因，首先是该餐厅距离德国大使馆约两公里。其次是该餐厅为典型的北京四合院风格，有老北京特色。“价位也合适，人均消费为300元，符合德国使馆和中国外交部的要求。”负责人说。</div>
+				<div>当天负责服务的前厅主管陈女士表示，当晚菜品“都是带有老北京特色的。”不过不论是店长还是负责服务的工作人员都表示，“总统特别中意北京烤鸭。”
+
+郝女士称，当烤鸭上桌时，高克就称赞摆盘很精致很新颖。第一份烤鸭卷是她帮忙包的，然后高克用刀叉将烤鸭切成小块后再吃。高克也对卷烤鸭产生了兴趣，第二份便要求自己来包。“虽然包得不是特别好，但他吃得很开心。又连着吃了两份烤鸭卷，每次都称赞其味道好极了。”郝女士说。</div>
 				
 			</div>
 		</article>

@@ -4,6 +4,11 @@
 	margin:0;
 }
 
+body {
+	background:url("/Garleton/img/gray017.png");
+	opacity:0.9;
+}
+
 a {
 	text-decoration: none;
 }
@@ -24,6 +29,7 @@ ul{
 #header {
 	width:100%;
 	height:480px;
+	
 } 
 
 #top_info{
@@ -46,7 +52,10 @@ ul{
 
 #nav_bar {
 	height:84px;
-	width:1150px;
+	width:auto;
+	padding-left:8%;
+	padding-right:8%;
+	
 	margin:0 auto;
 }
 
@@ -62,7 +71,6 @@ ul{
 
 #logo {
 	padding-left:24px;
-	height:84px;
 	line-height: 84px;
 	font-size:24px;
 	font-style:italic;
@@ -73,30 +81,29 @@ ul{
 }
 
 #logo {
-	display:inline-block;
-	width:30%;
+	display:block;
+	float:left;
+	width:22%;
 	cursor:pointer;
 }
 
-#nav_bar ul {
+#nav_bar .sign  {
 	padding-top:32px;
 	float:right;
 	font-size:18px;
 	line-height: 24px;
 }
 
-#nav_bar li {
+#nav_bar .sign li {
 	float:left;
+	padding-left:20px;
 }
 
-#nav_bar li {
-	padding-left:30px;
-}
+#log_out{
 
-#nav_bar li:last-of-type {
 	padding-right:30px;
+	
 }
-
 /* end nav style set */
 
 
@@ -124,6 +131,31 @@ article {
 	float:left;
 
 }
+
+#content {
+	display:-webkit-box;
+	-webkit-box-orient:horizontal;
+}
+
+#content div {
+	
+	padding:30px;
+}
+
+#content div:nth-of-type(1){
+	-webkit-box-flex:1.0;
+
+}
+#content div:nth-of-type(2){
+	-webkit-box-flex:1.0;
+
+}
+#content div:nth-of-type(3){
+	-webkit-box-flex:1.0;
+
+}
+
+
 /* end article style set */
 
 /* aside style set */

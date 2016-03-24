@@ -12,7 +12,30 @@
 	
 	start = {
 		
+		
+		
 		addButtonListener:function(){
+		
+			util.addLoad(this.addAdminBarListener);
+			util.addLoad(this.addCategoryListener);
+		
+		},
+		
+		addCategoryListener:function(){
+			$(".search_rule").mouseenter(function(){
+				
+				$(".category ul").show();
+				
+				$(".category ul").mouseleave(function(){
+					
+					$(".category ul").hide();
+					
+				});
+				
+			});
+		},
+			
+		addAdminBarListener:function(){
 	
 				$(".manage").mouseenter(function(){
 			
@@ -53,15 +76,145 @@
 		
 		addInstitutionAction:function(){
 			
+			
 			$("#institutionAction .query").click(this.queryInstitution);
 			$("#institutionAction .add").click(this.addInstitution);
 			$("#institutionAction .delete").click(this.deleteInstitution);
 			
+		},
+		
+		addAuthorizeAction:function(){
+			
+			$("#authorizeAction .columnAuthorize").click(this.authorizeColumn);
+			$("#authorizeAction .articleAuthorize").click(this.authorizeArticle);
+			
+		},
+		
+		authorizeColumn:function(ev){
+			
+			ev.preventDefault();
+			
+			$("#main_block header").html("");
+			$("#content").empty();
+			
+			$("#main_block header").html("授权栏目管理：");
+			
+			var person = document.createElement("input");
+			person.id="id";
+			person.name="id";
+			person.type="text";
+			
+			var submit = document.createElement("a");
+			submit.href="";
+			submit.innerHTML = "授权给他";
+			
+			util.addEvent(submit,"click",function(ev){
+				
+				ev.preventDefault();
+				
+				$.ajax({
+					
+					type:"post",
+					async:true,
+					url:"",
+					data:{},
+					dataType:"json",
+					success:function(data){
+						
+						if(data!=null){
+							
+							alert(data);
+							
+						}
+						
+					}
+					
+				});
+				
+				
+			});
+			
+			var cancel = document.createElement("a");
+			cancel.href = "";
+			cancel.innerHTML = "取消";
+			
+			util.addEvent(cancel,"click",function(ev){
+				
+				ev.preventDefault();
+				
+				$("#content").empty();
+				
+				$("#main_block header").html("");
+				
+			});
+			
+			$("#content").append(person).append(submit).append(cancel);
+			
+		},
+		
+		authorizeArticle:function(ev){
+			
+			ev.preventDefault();
+			
+			$("#main_block header").html("");
+			$("#content").empty();
+			
+			$("#main_block header").html("授权文章管理：");
+			
+			var person = document.createElement("input");
+			person.id="id";
+			person.name="id";
+			person.type="text";
+			
+			var submit = document.createElement("a");
+			submit.href="";
+			submit.innerHTML = "授权给他";
+			
+			util.addEvent(submit,"click",function(ev){
+				
+				ev.preventDefault();
+				
+				$.ajax({
+					
+					type:"post",
+					async:true,
+					url:"",
+					data:{},
+					dataType:"json",
+					success:function(data){
+						
+						if(data!=null){
+							
+							alert(data);
+							
+						}
+						
+					}
+					
+				});
+				
+				
+			});
+			
+			var cancel = document.createElement("a");
+			cancel.href = "";
+			cancel.innerHTML = "取消";
+			
+			util.addEvent(cancel,"click",function(ev){
+				
+				ev.preventDefault();
+				
+				$("#content").empty();
+				
+				$("#main_block header").html("");
+				
+			});
+			
+			$("#content").append(person).append(submit).append(cancel);
 			
 		},
 		
 		queryUser:function(ev){
-			
 			ev.preventDefault();
 			
 			$("#main_block header").html("");
@@ -76,6 +229,7 @@
 			var submit = document.createElement("a");
 			submit.href = "";
 			submit.innerHTML = "提交";
+			
 			util.addEvent(submit,"click",function(ev){
 				
 				ev.preventDefault();
@@ -91,6 +245,8 @@
 					}
 					
 				});
+				
+				
 				
 				
 			});
@@ -352,7 +508,7 @@
 						if(aInput[i].value == ""){
 							str += "\"\",";
 						}else{
-							str += aInput[i].value = ",";
+							str += "\""+aInput[i].value +"\""+ ",";
 						}
 						
 					}
@@ -455,16 +611,25 @@
 			
 		},
 		
+		setContentDisplay:function(){
+			
+			$("#content").css("display","block");
+			
+		},
+		
 		
 		configure:function(){
-			util.addLoad(this.addButtonListener());
-			util.addLoad(this.addUserAction());
-			util.addLoad(this.addInstitutionAction());
+			
+			this.setContentDisplay();
+			this.addButtonListener();
+			this.addUserAction();
+			this.addInstitutionAction();
+			this.addAuthorizeAction();
 			
 		}
 		
 	};
 	
-	start.configure();
-	
 })()
+
+start.configure();

@@ -13,6 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Garleton/bootstrap3.3.6/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/Garleton/css/index.css">
 	<link rel="stylesheet" href="/Garleton/css/admin.css">
+	<link rel="stylesheet" href="/Garleton/css/myBreadcrumb.css"/>
+	<link rel="stylesheet" href="/Garleton/css/search_icon.css"/>
 
 </head>
 <body>
@@ -69,7 +71,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="logo">
 				Garleton Academy
 			</div>
-			<ul>
+			
+			<ul class="myBreadcrumb">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Vehicles</a></li>
+				<li><a href="#">Vans</a></li>
+				<li><a href="#">Camper Vans</a></li>
+			</ul>
+			
+			<div class="search">
+			
+				<div class="category">
+					
+					<a href="" class="search_rule">类别</a>
+					<ul>
+						<li><a href="">文章名</a></li>
+						<li><a href="">时间</a></li>
+						<li><a href="">发布人</a></li>
+					</ul>	
+				</div>
+			
+				<input type="text" placeholder="支持模糊匹配" id="search_bar"/>
+				
+				<div class="icon"><a></a></div>
+			</div>
+			
+			<ul class="sign">
 				
 				
 				<li>
@@ -87,6 +114,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a href="" class="delete">删除机构</a></li>
 					</ul>
 				</li>
+				
+
+				
+				<li>
+					<a class="manage" href="">授权</a>
+					<ul id="authorizeAction">
+						<li><a href="" class="columnAuthorize">栏目</a></li>
+						<li><a href="" class="articleAuthorize">文章</a></li>
+					</ul>
+				</li>
+				
 				<li><a href="" id="log_out">Log Out</a></li>
 	
 			</ul>

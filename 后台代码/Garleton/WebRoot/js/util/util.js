@@ -10,6 +10,10 @@
 		
 		addLoad:function(func){
 		
+			if(typeof func !== "function"){
+				throw new Error("func 不是 函数");
+			}
+		
 			if(window.onload == null){
 				
 				window.onload = func;

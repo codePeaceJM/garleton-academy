@@ -9,6 +9,10 @@
 	}
 
 	index = {
+		
+		freshInterval:3000,
+		
+		interval:null,
 
 		setCurtain : function(ev) {
 			function fix(ev) {
@@ -100,17 +104,92 @@
 				form2.submit();
 			}
 		},
+		
+		getColumnArticle:function(){
+			
+			$.ajax({
+				
+				type:"post",
+				url:"",
+				async:true,
+				data:{},
+				dataType:"json",
+				success:function(data){
+					
+					//解析data
+				
+					if(data.constructor !== Array){
+						
+						return new Error("这不是一个数组");
+						
+					}else{
+						
+						
+						
+						for(var i = 0 ;i<data.length;i++){
+							
+							try{
+								var title = document.createElement("h2");
+								title.innerHTML = data[i].title;
+								
+								var date = document.createElement("p");
+								date.innerHTML = data[i].date;
+								
+								var article = document.createElement("article");
+								article.innerHTML = data[i].article;
+								
+								$("#content div:nth-of-type("+(i+1)+")")
+									.append(title)
+									.append(date)
+									.append(article);
+								
+							}catch(e){
+								
+								throw new Error("有什么属性数据里没有");
+								
+							}
+							
+						}
+						
+					}
+					
+				}
+				
+			});
+			
+		},
 
+		addCategoryListener:function(){
+			$(".search_rule").mouseenter(function(){
+				
+				$(".category ul").show();
+				
+				$(".category ul").mouseleave(function(){
+					
+					$(".category ul").hide();
+					
+				});
+				
+			});
+		},
+		
+		
 		configure : function() {
 
-			util.addLoad(this.setCurtain);
 			
+			util.addLoad(this.getColumnArticle);
+			
+			this.interval = setInterval(this.addLoad,this.freshInterval);
+			
+			util.addLoad(this.setCurtain);
 			util.addLoad(this.isIntegrity);
 			
+			util.addLoad(this.addCategoryListener);
 		}
 
 	};
 
-	index.configure();
 
 })();
+
+window.index.configure();
