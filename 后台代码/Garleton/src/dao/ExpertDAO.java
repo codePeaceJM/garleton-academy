@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -80,64 +81,75 @@ public class ExpertDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-
-	public List findByExample(Expert instance) {
-		log.debug("finding Expert instance by example");
-		try {
-			List results = getHibernateTemplate().findByExample(instance);
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
+	public List findByName(Object value) {
+		Session session = getSession();
+		Transaction tx=session.beginTransaction(); 
+		String hql="from Expert as expert where expert.name like ? ";
+		Query query = session.createQuery(hql); 
+		query.setString(0,"%"+value+"%");
+		
+		List list=query.list(); 
+		tx.commit(); 
+	    return list;
 	}
 
-	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Expert instance with property: " + propertyName
-				+ ", value: " + value);
-		try {
-			String queryString = "from Expert as model where model."
-					+ propertyName + "= ?";
-			return getHibernateTemplate().find(queryString, value);
-		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
-			throw re;
-		}
-	}
-
-	public List findByName(Object name) {
-		return findByProperty(NAME, name);
-	}
-
-	public List findByPhoto(Object photo) {
-		return findByProperty(PHOTO, photo);
-	}
-
-	public List findByDescription(Object description) {
-		return findByProperty(DESCRIPTION, description);
-	}
-
-	public List findByAchivements(Object achivements) {
-		return findByProperty(ACHIVEMENTS, achivements);
-	}
-
-	public List findByRemarks(Object remarks) {
-		return findByProperty(REMARKS, remarks);
-	}
-
-	public List findByType(Object type) {
-		return findByProperty(TYPE, type);
-	}
-
-	public List findByStrategy(Object strategy) {
-		return findByProperty(STRATEGY, strategy);
-	}
-
-	public List findByPublic_(Object public_) {
-		return findByProperty(PUBLIC_, public_);
-	}
+//	public List findByExample(Expert instance) {
+//		log.debug("finding Expert instance by example");
+//		try {
+//			List results = getHibernateTemplate().findByExample(instance);
+//			log.debug("find by example successful, result size: "
+//					+ results.size());
+//			return results;
+//		} catch (RuntimeException re) {
+//			log.error("find by example failed", re);
+//			throw re;
+//		}
+//	}
+//
+//	public List findByProperty(String propertyName, Object value) {
+//		log.debug("finding Expert instance with property: " + propertyName
+//				+ ", value: " + value);
+//		try {
+//			String queryString = "from Expert as model where model."
+//					+ propertyName + "= ?";
+//			return getHibernateTemplate().find(queryString, value);
+//		} catch (RuntimeException re) {
+//			log.error("find by property name failed", re);
+//			throw re;
+//		}
+//	}
+//
+//	public List findByName(Object name) {
+//		return findByProperty(NAME, name);
+//	}
+//
+//	public List findByPhoto(Object photo) {
+//		return findByProperty(PHOTO, photo);
+//	}
+//
+//	public List findByDescription(Object description) {
+//		return findByProperty(DESCRIPTION, description);
+//	}
+//
+//	public List findByAchivements(Object achivements) {
+//		return findByProperty(ACHIVEMENTS, achivements);
+//	}
+//
+//	public List findByRemarks(Object remarks) {
+//		return findByProperty(REMARKS, remarks);
+//	}
+//
+//	public List findByType(Object type) {
+//		return findByProperty(TYPE, type);
+//	}
+//
+//	public List findByStrategy(Object strategy) {
+//		return findByProperty(STRATEGY, strategy);
+//	}
+//
+//	public List findByPublic_(Object public_) {
+//		return findByProperty(PUBLIC_, public_);
+//	}
 
 	public List findAll() {
 		log.debug("finding all Expert instances");

@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -78,59 +79,71 @@ public class CourseDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List findByExample(Course instance) {
-		log.debug("finding Course instance by example");
-		try {
-			List results = getHibernateTemplate().findByExample(instance);
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
+	public List findByName(Object value) {
+		Session session = getSession();
+		Transaction tx=session.beginTransaction(); 
+		String hql="from Course as course where course.name like ? ";
+		Query query = session.createQuery(hql); 
+		query.setString(0,"%"+value+"%");
+		
+		List list=query.list(); 
+		tx.commit(); 
+	    return list;
 	}
-
-	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Course instance with property: " + propertyName
-				+ ", value: " + value);
-		try {
-			String queryString = "from Course as model where model."
-					+ propertyName + "= ?";
-			return getHibernateTemplate().find(queryString, value);
-		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
-			throw re;
-		}
-	}
-
-	public List findByName(Object name) {
-		return findByProperty(NAME, name);
-	}
-
-	public List findByType(Object type) {
-		return findByProperty(TYPE, type);
-	}
-
-	public List findByImage(Object image) {
-		return findByProperty(IMAGE, image);
-	}
-
-	public List findByEnclosure(Object enclosure) {
-		return findByProperty(ENCLOSURE, enclosure);
-	}
-
-	public List findByOpenCharacter(Object openCharacter) {
-		return findByProperty(OPEN_CHARACTER, openCharacter);
-	}
-
-	public List findByDescription(Object description) {
-		return findByProperty(DESCRIPTION, description);
-	}
-
-	public List findByRemarks(Object remarks) {
-		return findByProperty(REMARKS, remarks);
-	}
+	
+//	public List findByExample(Course instance) {
+//		log.debug("finding Course instance by example");
+//		try {
+//			List results = getHibernateTemplate().findByExample(instance);
+//			log.debug("find by example successful, result size: "
+//					+ results.size());
+//			return results;
+//		} catch (RuntimeException re) {
+//			log.error("find by example failed", re);
+//			throw re;
+//		}
+//	}
+//
+//	public List findByProperty(String propertyName, Object value) {
+//		log.debug("finding Course instance with property: " + propertyName
+//				+ ", value: " + value);
+//		try {
+//			String queryString = "from Course as model where model."
+//					+ propertyName + "= ?";
+//			return getHibernateTemplate().find(queryString, value);
+//		} catch (RuntimeException re) {
+//			log.error("find by property name failed", re);
+//			throw re;
+//		}
+//	}
+//
+//	public List findByName(Object name) {
+//		return findByProperty(NAME, name);
+//	}
+//
+//	public List findByType(Object type) {
+//		return findByProperty(TYPE, type);
+//	}
+//
+//	public List findByImage(Object image) {
+//		return findByProperty(IMAGE, image);
+//	}
+//
+//	public List findByEnclosure(Object enclosure) {
+//		return findByProperty(ENCLOSURE, enclosure);
+//	}
+//
+//	public List findByOpenCharacter(Object openCharacter) {
+//		return findByProperty(OPEN_CHARACTER, openCharacter);
+//	}
+//
+//	public List findByDescription(Object description) {
+//		return findByProperty(DESCRIPTION, description);
+//	}
+//
+//	public List findByRemarks(Object remarks) {
+//		return findByProperty(REMARKS, remarks);
+//	}
 
 	public List findAll() {
 		log.debug("finding all Course instances");

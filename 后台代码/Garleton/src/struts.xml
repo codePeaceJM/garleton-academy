@@ -124,5 +124,8 @@
 		<result name="update_expert_success">/index.jsp</result>
 		<result name="update_expert_fail">/index.jsp</result>
 	</action>
+	<action name="logAction" class="logAction">
+		<result name="test">/index.jsp</result>
+	</action>
 </package>
 </struts>    

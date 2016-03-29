@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -40,14 +41,14 @@ public class NewsDAO extends HibernateDaoSupport {
 	}
 
 	public void save(News transientInstance) {
-		// log.debug("saving News instance");
-		// try {
-		// getHibernateTemplate().save(transientInstance);
-		// log.debug("save successful");
-		// } catch (RuntimeException re) {
-		// log.error("save failed", re);
-		// throw re;
-		// }
+//		 log.debug("saving News instance");
+//		 try {
+//		 getHibernateTemplate().save(transientInstance);
+//		 log.debug("save successful");
+//		 } catch (RuntimeException re) {
+//		 log.error("save failed", re);
+//		 throw re;
+//		 }
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		session.save(transientInstance);
@@ -63,14 +64,14 @@ public class NewsDAO extends HibernateDaoSupport {
 	}
 
 	public void delete(News persistentInstance) {
-		// log.debug("deleting News instance");
-		// try {
-		// getHibernateTemplate().delete(persistentInstance);
-		// log.debug("delete successful");
-		// } catch (RuntimeException re) {
-		// log.error("delete failed", re);
-		// throw re;
-		// }
+//		 log.debug("deleting News instance");
+//		 try {
+//		 getHibernateTemplate().delete(persistentInstance);
+//		 log.debug("delete successful");
+//		 } catch (RuntimeException re) {
+//		 log.error("delete failed", re);
+//		 throw re;
+//		 }
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		session.delete(persistentInstance);
@@ -102,50 +103,61 @@ public class NewsDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding News instance with property: " + propertyName
-				+ ", value: " + value);
-		try {
-			String queryString = "from News as model where model."
-					+ propertyName + "= ?";
-			return getHibernateTemplate().find(queryString, value);
-		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
-			throw re;
-		}
+//	public List findByProperty(String propertyName, Object value) {
+//		log.debug("finding News instance with property: " + propertyName
+//				+ ", value: " + value);
+//		try {
+//			String queryString = "from News as model where model."
+//					+ propertyName + "= ?";
+//			return getHibernateTemplate().find(queryString, value);
+//		} catch (RuntimeException re) {
+//			log.error("find by property name failed", re);
+//			throw re;
+//		}
+//	}
+	public List findByTitle(Object value) {
+		Session session = getSession();
+		Transaction tx=session.beginTransaction(); 
+		String hql="from News as news where news.title like ? ";
+		Query query = session.createQuery(hql); 
+		query.setString(0,"%"+value+"%");
+		
+		List list=query.list(); 
+		tx.commit();
+	    return list;
 	}
 
-	public List findByNewstype(Object newstype) {
-		return findByProperty(NEWSTYPE, newstype);
-	}
-
-	public List findByColumnName(Object columnName) {
-		return findByProperty(COLUMN_NAME, columnName);
-	}
-
-	public List findByTitle(Object title) {
-		return findByProperty(TITLE, title);
-	}
-
-	public List findByContentAbout(Object contentAbout) {
-		return findByProperty(CONTENT_ABOUT, contentAbout);
-	}
-
-	public List findByContent(Object content) {
-		return findByProperty(CONTENT, content);
-	}
-
-	public List findByPublisher(Object publisher) {
-		return findByProperty(PUBLISHER, publisher);
-	}
-
-	public List findByPublishTime(Object publishTime) {
-		return findByProperty(PUBLISH_TIME, publishTime);
-	}
-
-	public List findByPicture(Object picture) {
-		return findByProperty(PICTURE, picture);
-	}
+//	public List findByNewstype(Object newstype) {
+//		return findByProperty(NEWSTYPE, newstype);
+//	}
+//
+//	public List findByColumnName(Object columnName) {
+//		return findByProperty(COLUMN_NAME, columnName);
+//	}
+//
+//	public List findByTitle(Object title) {
+//		return findByProperty(TITLE, title);
+//	}
+//
+//	public List findByContentAbout(Object contentAbout) {
+//		return findByProperty(CONTENT_ABOUT, contentAbout);
+//	}
+//
+//	public List findByContent(Object content) {
+//		return findByProperty(CONTENT, content);
+//	}
+//
+//	public List findByPublisher(Object publisher) {
+//		return findByProperty(PUBLISHER, publisher);
+//	}
+//
+//	public List findByPublishTime(Object publishTime) {
+//		return findByProperty(PUBLISH_TIME, publishTime);
+//	}
+//
+//	public List findByPicture(Object picture) {
+//		return findByProperty(PICTURE, picture);
+//	}
 
 	public List findAll() {
 		log.debug("finding all News instances");

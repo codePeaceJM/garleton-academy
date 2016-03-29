@@ -39,27 +39,24 @@ public class ColumnDAO extends HibernateDaoSupport {
 	}
 
 	public void save(Column transientInstance) {
-		// log.debug("saving Column instance");
-		// try {
-		// getHibernateTemplate().save(transientInstance);
-		// log.debug("save successful");
-		// } catch (RuntimeException re) {
-		// log.error("save failed", re);
-		// throw re;
-		// }
+//		log.debug("saving Column instance");
+//		try {
+//			getHibernateTemplate().save(transientInstance);
+//			log.debug("save successful");
+//		} catch (RuntimeException re) {
+//			log.error("save failed", re);
+//			throw re;
+//		}
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		session.save(transientInstance);
 		tx.commit();
 	}
-
-	public void update(Column c) {
-
+	public void update(Column c){
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		session.update(c);
 		tx.commit();
-		
 	}
 
 	public void delete(Column persistentInstance) {
@@ -115,7 +112,7 @@ public class ColumnDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List findByInsititute(Object institute) {
+	public List findByInstitute(Object institute) {
 		return findByProperty(INSTITUTE, institute);
 	}
 
