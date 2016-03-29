@@ -153,7 +153,7 @@
 
 util.addLoad(function(){
 	
-	var multCol = new window.multColumn(700,200,2,'container');
+	var multCol = new window.multColumn(800,200,2,'container');
 
 			multCol.configure();
 

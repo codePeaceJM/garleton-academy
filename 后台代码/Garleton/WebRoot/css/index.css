@@ -131,7 +131,6 @@ article {
 	width:75%;
 
 	margin-top:30px;
-	border:1px solid gray;
 	float:left;
 
 }
@@ -151,7 +150,7 @@ aside{
 	height:300px;
 	width:25%;
 	margin-top:30px;
-	border:1px solid gray;
+
 	float:right;
 }
 

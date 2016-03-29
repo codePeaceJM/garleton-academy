@@ -73,8 +73,9 @@
 	outline:none;
 }
 
-#search_result {
 
+#search_result {
+	display:none;
 	box-sizing:border-box;
 	position:absolute;
 	left:0;
@@ -82,8 +83,11 @@
 	width:100%;
 	margin-top:26px;
 	border:1px solid gray;
+	z-index:5;
 	
 }
+
+
 
 #search_result a {
 	display:block;

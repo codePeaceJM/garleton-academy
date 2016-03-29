@@ -204,9 +204,14 @@
 			
 			var that = this;
 			
-			$("#search_bar").change(function(){
+			$("#search_bar").on('input',function(){
 				
-				console.log("模糊匹配");
+				$("#search_result").show();
+				
+				if(this.value==""){
+					$("#search_result").hide();
+				}
+				
 				
 				$.ajax({
 					
@@ -248,9 +253,7 @@
 			
 		},
 		
-		
-		
-		
+
 		configure : function() {
 
 			
@@ -265,7 +268,6 @@
 			
 			util.addLoad(this.recordCategory);
 			util.addLoad(this.fuzzyMatch);
-			
 			
 		}
 
