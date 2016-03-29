@@ -15,6 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Garleton/css/admin.css">
 	<link rel="stylesheet" href="/Garleton/css/myBreadcrumb.css"/>
 	<link rel="stylesheet" href="/Garleton/css/search_icon.css"/>
+	<link rel="stylesheet" href="/Garleton/css/pubuliu.css"/>
+	
 
 </head>
 <body>
@@ -91,7 +93,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>	
 				</div>
 			
-				<input type="text" placeholder="支持模糊匹配" id="search_bar"/>
+				<div class="search_ajax">
+					<input type="text" placeholder="支持模糊匹配" id="search_bar"/>
+				
+					<ul id="search_result">
+						<li><a>1234</a></li>
+						<li><a>1234</a></li>
+						<li><a>1234</a></li>
+						
+					</ul>
+				</div>
 				
 				<div class="icon"><a></a></div>
 			</div>
@@ -159,5 +170,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="/Garleton/bootstrap3.3.6/dist/js/bootstrap.min.js"></script>
 	<script src="/Garleton/js/util/util.js"></script>
 	<script src="/Garleton/js/admin.js"></script>
+	
+	<script src="/Garleton/js/pubuliu.js"></script>
+	
 </body>
 </html>

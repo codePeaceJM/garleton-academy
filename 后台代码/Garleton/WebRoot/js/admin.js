@@ -18,6 +18,10 @@
 		
 			util.addLoad(this.addAdminBarListener);
 			util.addLoad(this.addCategoryListener);
+			util.addLoad(this.addCategoryListener);
+			util.addLoad(this.fuzzyMatch);
+			
+			
 		
 		},
 		
@@ -617,6 +621,93 @@
 			
 		},
 		
+		//搜索框搜索类别显示与隐藏
+		addCategoryListener:function(){
+			$(".search_rule").mouseenter(function(){
+				
+				$(".category ul").show();
+				
+				$(".search_ajax").mouseenter(function(){
+					
+					$(".category ul").hide();
+					
+				});
+				
+				$(".category ul").mouseleave(function(){
+					
+					$(".category ul").hide();
+					
+				});
+				
+			});
+		},
+		
+		//记录搜索种类
+		recordCategory:function(){
+			
+			
+			var that  =this;
+			
+			$(".category ul li a").click(function(ev){
+				
+				ev.preventDefault();
+				console.log($(this).html());
+				that.searchCategory = $(this).html();
+				$(".search_rule").html($(this).html());
+				$(".category ul").hide();
+				
+			});
+		},
+		
+		//模糊匹配
+		fuzzyMatch:function(){
+			
+			var that = this;
+			
+			$("#search_bar").change(function(){
+				
+				console.log("模糊匹配");
+				
+				$.ajax({
+					
+					type:"post",
+					url:"",
+					async:true,
+					data:{
+						category:that.searchCategory,
+						text:$(this).val()
+					},
+					dataType:"json",
+					success:function(data){
+						var arr = eval("("+data+")");
+						
+						if(arr instanceof Array){
+							
+							
+							for(var i=0;i<arr.length;i++){
+								
+								var li = document.createElement("li");
+								var a = document.createElement("a");
+								a.innerHTML = arr[i].title;
+								a.href=arr[i].src;
+								li.appendChild(a);
+								
+								$("#search_result").append(li);
+							}
+							
+						}else{
+							throw new Error("返回的而不是一个数组");
+						}
+						
+					}
+					
+				});
+				
+				
+			});
+			
+		},
+		
 		
 		configure:function(){
 			
@@ -625,6 +716,7 @@
 			this.addUserAction();
 			this.addInstitutionAction();
 			this.addAuthorizeAction();
+			this.recordCategory();
 			
 		}
 		
