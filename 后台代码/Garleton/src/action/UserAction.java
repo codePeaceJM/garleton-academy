@@ -1,4 +1,4 @@
-package action;
+﻿package action;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
-import service.FileServiceImpl;
+import service.LogService;
 import service.UserService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -25,6 +25,7 @@ import entity.User;
 public class UserAction extends ActionSupport implements SessionAware,ModelDriven<User>{
 
 	UserService userService;
+	LogService logService;
 	private ArrayList<User> userList;
 	private User user=new User();
 	private Map<String, Object> session;
@@ -79,10 +80,18 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	public LogService getLogService() {
+		return logService;
+	}
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 	public String log(){
 		if(userService.log(user.getName(), user.getPwd())){
+			user=userService.search(user.getName()).get(0);
 			session.put("name", user.getName());
-			return "log_success";
+			session.put("id", user.getId());
+			return "log_admin_success";
 		}
 		return "log_fail";
 	}
@@ -117,6 +126,7 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
 		response.setCharacterEncoding("UTF-8"); 
 		if(userService.del(user.getId())){
+			logService.add((Integer)session.get("id"),2,"user");
 			JSONObject jobject = JSONObject.fromObject("{text:'删除成功'}");
 			try {
 				response.getWriter().print(jobject);
@@ -136,6 +146,10 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 	}
 	public String reg() {
 		if(userService.reg(user)){
+			user=userService.search(user.getName()).get(0);
+			session.put("name", user.getName());
+			session.put("id", user.getId());
+			logService.add((Integer)session.get("id"),1,"user");
 			return "reg_success";
 		} else {
 			return "reg_fail";

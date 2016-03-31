@@ -3,12 +3,8 @@
 <struts>
 <package name="default" extends="struts-default">
 	<action name="userAction" class="userAction">
-		<result name="log_success">/disk/administrator.jsp</result>
+		<result name="log_admin_success">/disk/administrator.jsp</result>
 		<result name="log_fail">/error.jsp</result>
-		<result name="search_user_success">/MyJsp.jsp</result>
-		<result name="search_user_fail">/error.jsp</result>
-		<result name="del_user_success">/MyJsp.jsp</result>
-		<result name="del_user_fail">/error.jsp</result>
 		<result name="reg_success">/MyJsp.jsp</result>
 		<result name="reg_fail">/error.jsp</result>
 	</action>
@@ -20,14 +16,7 @@
 		<result name = "searchAll_district_success">/index.jsp</result>
 		<result name = "searchAll_district_fail">/index.jsp</result>	
 	</action>
-	<action name="institutionAction" class="institutionAction">
-		<result name = "add_institution_success">/index.jsp</result>
-		<result name = "add_institution_fail">/index.jsp</result>
-		<result name = "del_institution_success">/index.jsp</result>
-		<result name = "del_institution_fail">/index.jsp</result>
-		<result name = "searchAll_institution_success">/index.jsp</result>
-		<result name = "searchAll_institution_fail">/index.jsp</result>
-	</action>
+	<action name="institutionAction" class="institutionAction"/>
 	<action name = "columnAction" class="columnAction">
 		<result name = "add_column_success">/index.jsp</result>
 		<result name = "add_column_fail">/index.jsp</result>
