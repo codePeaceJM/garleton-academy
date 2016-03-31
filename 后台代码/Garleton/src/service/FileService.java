@@ -4,5 +4,5 @@ import java.io.File;
 
 public interface FileService {
 	
-	public void upload(File file,String path,String fileName);
+	public String upload(File file,String path,String extension);//返回文件名(不重复）
 }

@@ -11,4 +11,5 @@ public interface UserService {
 	public ArrayList<User> search(String name);
 	public ArrayList<User> searchAll();
 	public boolean del(int id);
+	public boolean update(User u);
 }

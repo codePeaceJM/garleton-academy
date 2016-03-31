@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
+import service.FileService;
 import service.LogService;
 import service.UserService;
 
@@ -26,6 +27,7 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 
 	UserService userService;
 	LogService logService;
+	FileService fileService;
 	private ArrayList<User> userList;
 	private User user=new User();
 	private Map<String, Object> session;
@@ -86,6 +88,12 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 	public void setLogService(LogService logService) {
 		this.logService = logService;
 	}
+	public FileService getFileService() {
+		return fileService;
+	}
+	public void setFileService(FileService fileService) {
+		this.fileService = fileService;
+	}
 	public String log(){
 		if(userService.log(user.getName(), user.getPwd())){
 			user=userService.search(user.getName()).get(0);
@@ -145,7 +153,11 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 		}
 	}
 	public String reg() {
+		int index = fileFileName.lastIndexOf(".");
+		String extension = fileFileName.substring(index);
 		if(userService.reg(user)){
+			user.setPhoto(fileService.upload(file, "/photo", extension));
+			userService.update(user);
 			user=userService.search(user.getName()).get(0);
 			session.put("name", user.getName());
 			session.put("id", user.getId());

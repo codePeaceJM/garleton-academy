@@ -64,6 +64,17 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
+	public void update(User persistentInstance) {
+		log.debug("updating User instance");
+		try {
+			getHibernateTemplate().update(persistentInstance);
+			log.debug("update successful");
+		} catch (RuntimeException re) {
+			log.error("update failed", re);
+			throw re;
+		}
+	}
+	
 	public User findById(java.lang.Integer id) {
 		log.debug("getting User instance with id: " + id);
 		try {

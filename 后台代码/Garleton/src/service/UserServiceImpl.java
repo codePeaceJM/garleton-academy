@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		if (testLogName(name)) {
 			userList=(ArrayList<User>)userDAO.findByName(name);
 			if (pwd.equals(userList.get(0).getPwd())) {
-				return true;//³É¹¦
+				return true;
 			} 
 		} 
 		return false;
@@ -85,5 +85,15 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean update(User u) {
+		// TODO Auto-generated method stub
+		try{
+			userDAO.update(u);
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
 	}
 }
