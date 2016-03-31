@@ -243,7 +243,7 @@
 					async:true,
 					url:"userAction!search",
 					dataType:"json",
-					data:{name:$("#name").val()},
+					data:{"user.name":$("#name").val()},
 					success:function(data){
 						alert(data);
 					}
@@ -292,6 +292,7 @@
 			submit.innerHTML = "提交";
 			util.addEvent(submit,"click",function(ev){
 				
+				alert($("#name").val());
 				ev.preventDefault();
 				$.ajax({
 					
@@ -299,9 +300,9 @@
 					async:true,
 					url:"userAction!del",
 					dataType:"json",
-					data:{name:$("#name").val()},
+					data:{"user.id":$("#name").val()},
 					success:function(data){
-						alert(data);
+						alert(data.text);
 					}
 					
 				});
@@ -529,11 +530,11 @@
 					
 					type:"post",
 					async:true,
-					url:"userAction!search",
+					url:"institutionAction!add",
 					dataType:"json",
-					data:tranverseForm("institutionForm"),
+					data:{str:tranverseForm("institutionForm")},
 					success:function(data){
-						alert(data);
+						alert(data.text);
 					}
 					
 				});

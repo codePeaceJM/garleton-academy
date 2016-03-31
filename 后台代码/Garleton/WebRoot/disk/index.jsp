@@ -44,7 +44,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<label>男<input type="radio" name="sex" value="male" ></label>
 				<label>女<input type="radio" name="sex" value="female" checked="checked"></label><br/>
 
-				<input type="text" placeholder="学院" name="unit" ><br/>
 				<input type="text" placeholder="单位" name="unit" ><br/>
 				<input type="text" placeholder="电话" name="tel" ><br/>
 				<input type="text" placeholder="手机" name="cel" ><br/>

@@ -3,7 +3,7 @@
 <struts>
 <package name="default" extends="struts-default">
 	<action name="userAction" class="userAction">
-		<result name="log_success">/MyJsp.jsp</result>
+		<result name="log_success">/disk/administrator.jsp</result>
 		<result name="log_fail">/error.jsp</result>
 		<result name="search_user_success">/MyJsp.jsp</result>
 		<result name="search_user_fail">/error.jsp</result>

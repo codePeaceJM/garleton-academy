@@ -1,6 +1,8 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.LogDAO;
 
@@ -17,9 +19,12 @@ public class LogServiceImpl implements LogService {
 		this.logDAO = logDAO;
 	}
 
-	public boolean add(Log log) {
+	public boolean add(Integer uid, Integer type, String content) {
 		// TODO Auto-generated method stub
 		try{
+			Date date=new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Log log = new Log(uid,type,sdf.format(date),content);
 			logDAO.save(log);
 			return true;
 		}catch (Exception e) {

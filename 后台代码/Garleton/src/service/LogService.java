@@ -6,7 +6,7 @@ import entity.Log;
 
 public interface LogService {
 
-	public boolean add(Log log);
+	public boolean add(Integer uid, Integer type, String content);
 	public ArrayList<Log> searchAll();
 	public ArrayList<Log> searchByUid(Integer uid);
 	public ArrayList<Log> searchByType(Integer type);

@@ -48,9 +48,8 @@
 				<value>entity/Log.hbm.xml</value></list>
 		</property></bean>
 	<bean id="userAction" class="action.UserAction" scope="prototype">
-		<property name="userService">
-			<ref bean="userService" />
-		</property>
+		<property name="userService" ref="userService" />
+		<property name="logService" ref="logService" />
 	</bean>
 	<bean id="districtAction" class="action.DistrictAction" scope="prototype"> 
 		<property name="districtService" ref="districtService"/> 
