@@ -20,6 +20,7 @@ import service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import common.Common.Role;
 
 import entity.User;
 
@@ -37,7 +38,7 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 	private String fileFileName;
 
 	private String fileContentType;
-	
+
 	public File getFile() {
 		return file;
 	}
@@ -97,9 +98,15 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 	public String log(){
 		if(userService.log(user.getName(), user.getPwd())){
 			user=userService.search(user.getName()).get(0);
+			Role role=Role.toRole(user.getRole());
 			session.put("name", user.getName());
 			session.put("id", user.getId());
-			return "log_admin_success";
+			session.put("role", role);
+			
+			switch(role){
+			case SA:
+				return "log_admin_success";
+			}
 		}
 		return "log_fail";
 	}
@@ -159,8 +166,10 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 			user.setPhoto(fileService.upload(file, "/photo", extension));
 			userService.update(user);
 			user=userService.search(user.getName()).get(0);
+			Role role=Role.toRole(user.getRole());
 			session.put("name", user.getName());
 			session.put("id", user.getId());
+			session.put("role", role);
 			logService.add((Integer)session.get("id"),1,"user");
 			return "reg_success";
 		} else {

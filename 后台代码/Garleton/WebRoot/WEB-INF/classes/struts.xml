@@ -2,9 +2,20 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 <package name="default" extends="struts-default">
+	<interceptors>
+		<interceptor name="ac" class="interceptor.AccessController"/>
+		<interceptor-stack name="acStack">    
+            <interceptor-ref name="defaultStack"/>   
+            <interceptor-ref name="ac"/>   
+		</interceptor-stack>  
+	</interceptors>
+	<default-interceptor-ref name="acStack"/>
+	<global-results>
+		<result name="authorityDeny">/MyJsp.jsp</result>
+	</global-results>
 	<action name="userAction" class="userAction">
 		<result name="log_admin_success">/disk/administrator.jsp</result>
-		<result name="log_fail">/error.jsp</result>
+		<result name="log_fail">/MyJsp.jsp</result>
 		<result name="reg_success">/MyJsp.jsp</result>
 		<result name="reg_fail">/error.jsp</result>
 	</action>

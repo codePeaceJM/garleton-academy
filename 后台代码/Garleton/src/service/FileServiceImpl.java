@@ -15,7 +15,7 @@ public class FileServiceImpl implements FileService {
 		try {
 			if (file != null) {
 				String dir = ServletActionContext.getRequest().getRealPath(path);
-				System.out.println(dir);
+				//System.out.println(dir);
 				File fileLoaction = new File(dir);
 				if (!fileLoaction.exists()) {
 					fileLoaction.mkdirs();
