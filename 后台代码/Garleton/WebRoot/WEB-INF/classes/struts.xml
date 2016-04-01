@@ -24,17 +24,17 @@
 		<result name = "add_district_fail">/index.jsp</result>
 		<result name = "del_district_success">/index.jsp</result>
 		<result name = "del_district_fail">/index.jsp</result>
-		<result name = "searchAll_district_success">/index.jsp</result>
-		<result name = "searchAll_district_fail">/index.jsp</result>	
+		<result name = "search_district_success">/index.jsp</result>
+		<result name = "search_district_fail">/index.jsp</result>	
 	</action>
-	<action name="institutionAction" class="institutionAction"/>
+	<action name="institutionAction" class="institutionAction" />
 	<action name = "columnAction" class="columnAction">
 		<result name = "add_column_success">/index.jsp</result>
 		<result name = "add_column_fail">/index.jsp</result>
 		<result name = "del_column_success">/index.jsp</result>
 		<result name = "del_column_fail">/index.jsp</result>
-		<result name = "searchAll_column_success">/index.jsp</result>
-		<result name = "searchAll_column_fail">/index.jsp</result>
+		<result name = "search_column_success">/index.jsp</result>
+		<result name = "search_column_fail">/index.jsp</result>
 		<result name = "update_column_success">/index.jsp</result>
 		<result name = "update_column_fail">/index.jsp</result>
 	</action>
@@ -43,8 +43,8 @@
 		<result name = "add_news_fail">/index.jsp</result>
 		<result name = "del_news_success">/index.jsp</result>
 		<result name = "del_news_fail">/index.jsp</result>
-		<result name = "searchAll_news_success">/index.jsp</result>
-		<result name = "searchAll_news_fail">/index.jsp</result>
+		<result name = "search_news_success">/index.jsp</result>
+		<result name = "search_news_fail">/index.jsp</result>
 		<result name = "update_news_success">/index.jsp</result>
 		<result name = "update_news_fail">/index.jsp</result>
 	</action>

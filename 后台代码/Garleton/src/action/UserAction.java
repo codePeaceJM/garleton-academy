@@ -24,15 +24,16 @@ import common.Common.Role;
 
 import entity.User;
 
-public class UserAction extends ActionSupport implements SessionAware,ModelDriven<User>{
+public class UserAction extends ActionSupport implements SessionAware,
+		ModelDriven<User> {
 
 	UserService userService;
 	LogService logService;
 	FileService fileService;
 	private ArrayList<User> userList;
-	private User user=new User();
+	private User user = new User();
 	private Map<String, Object> session;
-	
+
 	private File file;
 
 	private String fileFileName;
@@ -42,83 +43,102 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 	public File getFile() {
 		return file;
 	}
+
 	public void setFile(File file) {
 		this.file = file;
 	}
+
 	public String getFileFileName() {
 		return fileFileName;
 	}
+
 	public void setFileFileName(String fileFileName) {
 		this.fileFileName = fileFileName;
 	}
+
 	public String getFileContentType() {
 		return fileContentType;
 	}
+
 	public void setFileContentType(String fileContentType) {
 		this.fileContentType = fileContentType;
 	}
-	
+
 	public ArrayList<User> getUserList() {
 		return userList;
 	}
+
 	public void setUserList(ArrayList<User> userList) {
 		this.userList = userList;
 	}
+
 	public Map<String, Object> getSession() {
 		return session;
 	}
+
 	public void setSession(Map<String, Object> session) {
 		// TODO Auto-generated method stub
-		this.session=session;
+		this.session = session;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public UserService getUserService() {
 		return userService;
 	}
+
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
 	public LogService getLogService() {
 		return logService;
 	}
+
 	public void setLogService(LogService logService) {
 		this.logService = logService;
 	}
+
 	public FileService getFileService() {
 		return fileService;
 	}
+
 	public void setFileService(FileService fileService) {
 		this.fileService = fileService;
 	}
-	public String log(){
-		if(userService.log(user.getName(), user.getPwd())){
-			user=userService.search(user.getName()).get(0);
-			Role role=Role.toRole(user.getRole());
+
+	public String log() {
+		if (userService.log(user.getName(), user.getPwd())) {
+			user = userService.search(user.getName()).get(0);
+			Role role = Role.toRole(user.getRole());
 			session.put("name", user.getName());
 			session.put("id", user.getId());
 			session.put("role", role);
-			
-			switch(role){
+
+			switch (role) {
 			case SA:
 				return "log_admin_success";
 			}
 		}
 		return "log_fail";
 	}
-	public void search(){
-		if("".equals(user.getName())||user.getName()==null){
-			userList=userService.searchAll();
+
+	public void search() {
+		if ("".equals(user.getName()) || user.getName() == null) {
+			userList = userService.searchAll();
 		} else {
-			userList=userService.search(user.getName());
+			userList = userService.search(user.getName());
 		}
-		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-		response.setCharacterEncoding("UTF-8"); 
-		if(userList.isEmpty()){
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (userList.isEmpty()) {
 			try {
 				JSONObject jobject = JSONObject.fromObject("{text:'找不到用户'}");
 				response.getWriter().print(jobject);
@@ -127,8 +147,8 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 				e.printStackTrace();
 			}
 		} else {
-			JSONArray jsonArray =  JSONArray.fromObject(userList);
-			
+			JSONArray jsonArray = JSONArray.fromObject(userList);
+
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
@@ -137,11 +157,13 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 			}
 		}
 	}
+
 	public void del() {
-		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-		response.setCharacterEncoding("UTF-8"); 
-		if(userService.del(user.getId())){
-			logService.add((Integer)session.get("id"),2,"user");
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (userService.del(user.getId())) {
+			logService.add((Integer) session.get("id"), 2, "user");
 			JSONObject jobject = JSONObject.fromObject("{text:'删除成功'}");
 			try {
 				response.getWriter().print(jobject);
@@ -159,26 +181,29 @@ public class UserAction extends ActionSupport implements SessionAware,ModelDrive
 			}
 		}
 	}
+
 	public String reg() {
 		int index = fileFileName.lastIndexOf(".");
 		String extension = fileFileName.substring(index);
-		if(userService.reg(user)){
+		if (userService.reg(user)) {
 			user.setPhoto(fileService.upload(file, "/photo", extension));
 			userService.update(user);
-			user=userService.search(user.getName()).get(0);
-			Role role=Role.toRole(user.getRole());
+			user = userService.search(user.getName()).get(0);
+			Role role = Role.toRole(user.getRole());
 			session.put("name", user.getName());
 			session.put("id", user.getId());
 			session.put("role", role);
-			logService.add((Integer)session.get("id"),1,"user");
+			logService.add((Integer) session.get("id"), 1, "user");
 			return "reg_success";
 		} else {
 			return "reg_fail";
 		}
 	}
-	/*public void upload(){
-		new FileServiceImpl().upload(file, "/photo", fileFileName);
-	}*/
+
+	/*
+	 * public void upload(){ new FileServiceImpl().upload(file, "/photo",
+	 * fileFileName); }
+	 */
 	public User getModel() {
 		// TODO Auto-generated method stub
 		return user;

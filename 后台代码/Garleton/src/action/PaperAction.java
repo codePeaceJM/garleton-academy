@@ -17,11 +17,11 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Paper;
 
-public class PaperAction extends ActionSupport implements ModelDriven<Paper>{
+public class PaperAction extends ActionSupport implements ModelDriven<Paper> {
 	private Paper paper = new Paper();
 	PaperService paperService;
 	ArrayList<Paper> paperList;
-	
+
 	public Paper getPaper() {
 		return paper;
 	}
@@ -46,42 +46,45 @@ public class PaperAction extends ActionSupport implements ModelDriven<Paper>{
 		this.paperList = paperList;
 	}
 
-	public String add(){
-		if(paperService.add(paper)){
+	public String add() {
+		if (paperService.add(paper)) {
 			return "add_paper_success";
-		}else{
+		} else {
 			return "add_paper_fail";
 		}
 	}
-	
-	public String del(){
-		if(paperService.del(paper.getId())){
+
+	public String del() {
+		if (paperService.del(paper.getId())) {
 			return "del_paper_success";
-			
-		}else{
+
+		} else {
 			return "del_paper_fail";
 		}
 	}
-	public String update(){
-		if(paperService.update(paper)){
+
+	public String update() {
+		if (paperService.update(paper)) {
 			return "update_paper_success";
-		}else{
+		} else {
 			return "update_paper_fail";
 		}
-		
+
 	}
-	public String search(){
-		if("".equals(paper.getCoursename())||paper.getCoursename()==null){
-			paperList=paperService.searchAll();
-		}else{
-			paperList=paperService.search(paper.getCoursename());
+
+	public String search() {
+		if ("".equals(paper.getCoursename()) || paper.getCoursename() == null) {
+			paperList = paperService.searchAll();
+		} else {
+			paperList = paperService.search(paper.getCoursename());
 		}
-		if(paperList.isEmpty()){
+		if (paperList.isEmpty()) {
 			return "search_paper_fail";
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(paperList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(paperList);
+			HttpServletResponse response = (HttpServletResponse) ActionContext
+					.getContext().get(ServletActionContext.HTTP_RESPONSE);
+			response.setCharacterEncoding("UTF-8");
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
@@ -90,8 +93,9 @@ public class PaperAction extends ActionSupport implements ModelDriven<Paper>{
 			}
 			return "search_paper_success";
 		}
-		
+
 	}
+
 	public Paper getModel() {
 		// TODO Auto-generated method stub
 		return paper;
