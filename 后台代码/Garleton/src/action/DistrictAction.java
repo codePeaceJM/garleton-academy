@@ -2,14 +2,17 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import net.sf.json.JSONArray;
 
 import service.DistrictService;
+import service.LogService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,14 +20,20 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.District;
 
-public class DistrictAction extends ActionSupport implements ModelDriven<District>{
-	
+public class DistrictAction extends ActionSupport implements SessionAware,ModelDriven<District>{
+	LogService logService;
 	DistrictService districtService ;
 	ArrayList<District> districtList;
 	private District district = new District(); 
+	private Map<String, Object> session;
 	
 	
-	
+	public LogService getLogService() {
+		return logService;
+	}
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 	public DistrictService getDistrictService() {
 		return districtService;
 	}
@@ -41,7 +50,7 @@ public class DistrictAction extends ActionSupport implements ModelDriven<Distric
 	public String add(){
 		
 		if(districtService.add(district)){
-			
+			logService.add((Integer) session.get("id"), 1, "district");
 			return "add_district_success";
 		}
 		else
@@ -49,8 +58,10 @@ public class DistrictAction extends ActionSupport implements ModelDriven<Distric
 	}
 	
 	public String del(){
-		if(districtService.del(district.getId()))
+		if(districtService.del(district.getId())){
+			logService.add((Integer) session.get("id"), 2, "district");
 			return "del_district_success";
+		}
 		else
 			return "del_district_fail";
 	}
@@ -90,6 +101,14 @@ public class DistrictAction extends ActionSupport implements ModelDriven<Distric
 	public District getModel() {
 		// TODO Auto-generated method stub
 		return district;
+	}
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
 	}
 	
 

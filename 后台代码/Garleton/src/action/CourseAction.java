@@ -2,14 +2,17 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import service.CourseService;
+import service.LogService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,10 +20,20 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Course;
 
-public class CourseAction extends ActionSupport implements ModelDriven<Course>{
-	private Course course = new Course();
+public class CourseAction extends ActionSupport implements SessionAware,ModelDriven<Course>{
+	LogService logService;
 	CourseService courseService;
 	ArrayList<Course> courseList;
+	private Course course = new Course();	
+	private Map<String, Object> session;
+
+	public LogService getLogService() {
+		return logService;
+	}
+
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 
 	public Course getCourse() {
 		return course;
@@ -48,6 +61,7 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course>{
 	
 	public String add(){
 		if(courseService.add(course)){
+			logService.add((Integer) session.get("id"), 1, "course");
 			return "add_course_success";
 			
 		}else{
@@ -58,6 +72,7 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course>{
 	
 	public String del(){
 		if(courseService.del(course.getId())){
+			logService.add((Integer) session.get("id"), 2, "course");
 			return "del_course_success";
 			
 		}else{
@@ -67,6 +82,7 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course>{
 	
 	public String update(){
 		if(courseService.update(course)){
+			logService.add((Integer) session.get("id"), 3, "course");
 			return "update_course_success";
 			
 		}else{
@@ -101,6 +117,15 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course>{
 	public Course getModel() {
 		// TODO Auto-generated method stub
 		return course;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
 	}
 
 }

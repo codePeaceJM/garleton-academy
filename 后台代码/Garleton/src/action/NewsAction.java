@@ -2,13 +2,16 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
+import service.LogService;
 import service.NewsService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -17,14 +20,24 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.News;
 
-public class NewsAction extends ActionSupport implements ModelDriven<News> {
-
+public class NewsAction extends ActionSupport implements SessionAware,ModelDriven<News> {
+	LogService logService;
 	NewsService newsService;
 	ArrayList<News> newsList;
 	private News news = new News();
+	private Map<String, Object> session;
+
+	public LogService getLogService() {
+		return logService;
+	}
+
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 
 	public String add() {
 		if (newsService.add(news)) {
+			logService.add((Integer) session.get("id"), 1, "news");
 			return "add_news_success";
 		} else {
 			return "add_news_fail";
@@ -33,6 +46,7 @@ public class NewsAction extends ActionSupport implements ModelDriven<News> {
 
 	public String del() {
 		if (newsService.del(news.getId())) {
+			logService.add((Integer) session.get("id"), 2, "news");
 			return "del_news_success";
 		} else {
 			return "del_news_fail";
@@ -42,6 +56,7 @@ public class NewsAction extends ActionSupport implements ModelDriven<News> {
 
 	public String update() {
 		if (newsService.update(news)) {
+			logService.add((Integer) session.get("id"), 3, "news");
 			return "update_news_success";
 		} else {
 			return "update_news_fail";
@@ -100,6 +115,14 @@ public class NewsAction extends ActionSupport implements ModelDriven<News> {
 	public News getModel() {
 		// TODO Auto-generated method stub
 		return news;
+	}
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
 	}
 
 }

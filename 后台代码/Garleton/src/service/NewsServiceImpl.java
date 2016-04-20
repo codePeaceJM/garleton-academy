@@ -1,6 +1,8 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.NewsDAO;
 
@@ -31,6 +33,9 @@ public class NewsServiceImpl implements NewsService {
 	public boolean add(News n) {
 		// TODO Auto-generated method stub
 		try{
+			Date date = new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			n.setPublishTime(sdf.format(date));
 			newsDAO.save(n);
 		}catch(Exception e){
 			return false;

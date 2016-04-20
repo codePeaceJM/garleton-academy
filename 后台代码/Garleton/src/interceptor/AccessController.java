@@ -40,7 +40,7 @@ public class AccessController implements Interceptor {
 			invocation.invoke();
 		} else if (("knowledgeAction".equals(actionName)
 				|| "statuteAction".equals(actionName) || "casesAction"
-				.equals(actionName))
+				.equals(actionName)|| "resourceAction".equals(actionName))
 				&& ("SA".equals(role.toString())
 						|| "RM".equals(role.toString()) || method
 						.startsWith("search"))) {
@@ -50,8 +50,7 @@ public class AccessController implements Interceptor {
 						.equals(method) && ("WE".equals(role.toString()) || "SA"
 						.equals(role.toString()))))) {
 			invocation.invoke();
-		} else if (("courseAction".equals(actionName)
-				|| "paperAction".equals(actionName) || "questionAction"
+		} else if (("courseAction".equals(actionName) || "questionAction"
 				.equals(actionName))
 				&& ("SA".equals(role.toString())
 						|| "CM".equals(role.toString()) || method
@@ -59,6 +58,10 @@ public class AccessController implements Interceptor {
 			invocation.invoke();
 		} else if ("expertAction".equals(actionName)
 				&& ("SA".equals(role.toString()) || method.startsWith("search"))) {
+			invocation.invoke();
+		} else if ("paperAction".equals(actionName)
+				&& ("SA".equals(role.toString()) || "CM"
+						.equals(role.toString()))) {
 			invocation.invoke();
 		}
 		return "authorityDeny";

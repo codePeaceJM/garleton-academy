@@ -1,6 +1,8 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.CommentDAO;
 import entity.Comment;
@@ -29,6 +31,9 @@ public class CommentServiceImpl implements CommentService {
 	public boolean add(Comment c) {
 		// TODO Auto-generated method stub
 		try{
+			Date date=new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			c.setPublishtime(sdf.format(date));
 			commentDAO.save(c);
 		}catch(Exception e){
 			return false;

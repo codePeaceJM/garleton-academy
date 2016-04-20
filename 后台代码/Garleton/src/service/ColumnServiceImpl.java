@@ -1,6 +1,8 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.ColumnDAO;
 
@@ -18,7 +20,9 @@ public class ColumnServiceImpl implements ColumnService {
 	public boolean add(Column c) {
 		// TODO Auto-generated method stub
 		try{
-			
+			Date date=new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			c.setPublishtime(sdf.format(date));
 			columnDAO.save(c);
 		}catch(Exception e){
 			return false;

@@ -2,14 +2,17 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import service.ExpertService;
+import service.LogService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,11 +20,22 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Expert;
 
-public class ExpertAction extends ActionSupport implements ModelDriven<Expert>{
-	private Expert expert = new Expert();
+public class ExpertAction extends ActionSupport implements SessionAware,ModelDriven<Expert>{
+	LogService logService;
 	ExpertService expertService;
 	ArrayList<Expert> expertList;
+	private Expert expert = new Expert();
+	private Map<String, Object> session;
 	
+	
+	public LogService getLogService() {
+		return logService;
+	}
+
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
+
 	public Expert getExpert() {
 		return expert;
 	}
@@ -48,6 +62,7 @@ public class ExpertAction extends ActionSupport implements ModelDriven<Expert>{
 
 	public String add(){
 		if(expertService.add(expert)){
+			logService.add((Integer) session.get("id"), 1, "expert");
 			return "add_expert_success";
 		}else{
 			return "add_expert_fail";
@@ -56,6 +71,7 @@ public class ExpertAction extends ActionSupport implements ModelDriven<Expert>{
 	
 	public String del(){
 		if(expertService.del(expert.getId())){
+			logService.add((Integer) session.get("id"), 2, "expert");
 			return "del_expert_success";
 		}else{
 			return "del_expert_fail";
@@ -86,6 +102,7 @@ public class ExpertAction extends ActionSupport implements ModelDriven<Expert>{
 	
 	public String update(){
 		if(expertService.update(expert)){
+			logService.add((Integer) session.get("id"), 3, "expert");
 			return "update_expert_success";
 		}else{
 			return "update_expert_fail";
@@ -96,5 +113,16 @@ public class ExpertAction extends ActionSupport implements ModelDriven<Expert>{
 		// TODO Auto-generated method stub
 		return expert;
 	}
+
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
+	}
+	
 
 }

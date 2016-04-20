@@ -2,6 +2,7 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,8 +10,10 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import service.InstitutionService;
+import service.LogService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,13 +21,15 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Institution;
 
-public class InstitutionAction extends ActionSupport implements
+public class InstitutionAction extends ActionSupport implements SessionAware,
 		ModelDriven<Institution> {
+	LogService logService;
 
 	InstitutionService institutionService;
 	ArrayList<Institution> institutionList;
 	String str;
 	private Institution institution = new Institution();
+	private Map<String, Object> session;
 
 	public void add() {
 		HttpServletResponse response = (HttpServletResponse) ActionContext
@@ -35,6 +40,7 @@ public class InstitutionAction extends ActionSupport implements
 				.getClass());
 		// System.out.println(institution.getName());
 		if (institutionService.add(institution)) {
+			logService.add((Integer) session.get("id"), 1, "institution");
 			JSONObject jobject = JSONObject.fromObject("{text:'添加成功'}");
 			try {
 				response.getWriter().print(jobject);
@@ -59,6 +65,7 @@ public class InstitutionAction extends ActionSupport implements
 		response.setCharacterEncoding("UTF-8");
 		System.out.println(institution.getId());
 		if (institutionService.del(institution.getId())) {
+			logService.add((Integer) session.get("id"), 2, "institution");
 			JSONObject jobject = JSONObject.fromObject("{text:'删除成功'}");
 			try {
 				response.getWriter().print(jobject);
@@ -106,6 +113,15 @@ public class InstitutionAction extends ActionSupport implements
 		}
 
 	}
+	
+
+	public LogService getLogService() {
+		return logService;
+	}
+
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 
 	public InstitutionService getInstitutionService() {
 		return institutionService;
@@ -143,6 +159,15 @@ public class InstitutionAction extends ActionSupport implements
 		// TODO Auto-generated method stub
 
 		return institution;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
 	}
 
 }

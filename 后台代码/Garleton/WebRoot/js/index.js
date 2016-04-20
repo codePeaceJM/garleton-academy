@@ -216,14 +216,15 @@
 				$.ajax({
 					
 					type:"post",
-					url:"",
+					url:"NewsAction!search",
 					async:true,
 					data:{
-						category:that.searchCategory,
-						text:$(this).val()
+						"category":that.searchCategory,
+						"news.title":$(this).val()
 					},
 					dataType:"json",
 					success:function(data){
+						alert(data);
 						var arr = eval("("+data+")");
 						
 						if(arr instanceof Array){

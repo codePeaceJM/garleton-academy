@@ -46,15 +46,27 @@ public class PaperServiceImpl implements PaperService {
 		return true;
 	}
 
-	public ArrayList<Paper> search(String coursename) {
-		// TODO Auto-generated method stub
-		return paperList=(ArrayList<Paper>) paperDAO.findByCoursename(coursename);
-	}
+	
 
 	public ArrayList<Paper> searchAll() {
 		// TODO Auto-generated method stub
 		return paperList=(ArrayList<Paper>) paperDAO.findAll();
 	}
+	public ArrayList<Paper> searchByCourseName(String coursename) {
+		// TODO Auto-generated method stub
+		return paperList=(ArrayList<Paper>) paperDAO.findByCoursename(coursename);
+	}
+
+	public ArrayList<Paper> searchByTitle(String title) {
+		// TODO Auto-generated method stub
+		return paperList=(ArrayList<Paper>) paperDAO.findByTitle(title);
+	}
+
+	public ArrayList<Paper> searchByType(String type) {
+		// TODO Auto-generated method stub
+		return paperList=(ArrayList<Paper>) paperDAO.findByType(type);
+	}
+
 
 	public boolean update(Paper p) {
 		// TODO Auto-generated method stub
@@ -65,5 +77,6 @@ public class PaperServiceImpl implements PaperService {
 		}
 		return true;
 	}
+
 
 }

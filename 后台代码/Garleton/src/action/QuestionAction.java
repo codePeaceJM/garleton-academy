@@ -2,13 +2,16 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
+import service.LogService;
 import service.QuestionService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -17,10 +20,20 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Question;
 
-public class QuestionAction extends ActionSupport implements ModelDriven<Question>{
+public class QuestionAction extends ActionSupport implements SessionAware,ModelDriven<Question>{
 	private Question question = new Question();
 	QuestionService questionService;
 	ArrayList<Question> questionList;
+	private Map<String, Object> session;
+	LogService logService;
+
+	public LogService getLogService() {
+		return logService;
+	}
+
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 
 	public Question getQuestion() {
 		return question;
@@ -48,6 +61,7 @@ public class QuestionAction extends ActionSupport implements ModelDriven<Questio
 	
 	public String add(){
 		if(questionService.add(question)){
+			logService.add((Integer) session.get("id"), 1, "question");
 			return "add_question_success";
 		}else{
 			return "add_question_fail";
@@ -56,6 +70,7 @@ public class QuestionAction extends ActionSupport implements ModelDriven<Questio
 	}
 	public String update(){
 		if(questionService.update(question)){
+			logService.add((Integer) session.get("id"), 3, "question");
 			return "update_question_success";
 		}else{
 			return "update_question_fail";
@@ -88,5 +103,12 @@ public class QuestionAction extends ActionSupport implements ModelDriven<Questio
 		// TODO Auto-generated method stub
 		return question;
 	}
+	public Map<String, Object> getSession() {
+		return session;
+	}
 
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
+	}
 }

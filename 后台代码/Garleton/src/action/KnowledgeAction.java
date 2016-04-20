@@ -2,14 +2,17 @@ package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import service.KnowledgeService;
+import service.LogService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,10 +20,21 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Knowledge;
 
-public class KnowledgeAction extends ActionSupport implements ModelDriven<Knowledge>{
+public class KnowledgeAction extends ActionSupport implements SessionAware,ModelDriven<Knowledge>{
+	
 	private Knowledge knowledge = new Knowledge();
+	private Map<String, Object> session;
+	LogService logService;
 	KnowledgeService knowledgeService;
 	ArrayList<Knowledge> knowledgeList;
+
+	public LogService getLogService() {
+		return logService;
+	}
+
+	public void setLogService(LogService logService) {
+		this.logService = logService;
+	}
 
 	public Knowledge getKnowledge() {
 		return knowledge;
@@ -49,6 +63,7 @@ public class KnowledgeAction extends ActionSupport implements ModelDriven<Knowle
 
 	public String add(){
 		if(knowledgeService.add(knowledge)){
+			logService.add((Integer) session.get("id"), 1, "knowledge");
 			return "add_knowledge_success";
 		}else{
 			return "add_knowledge_fail";
@@ -56,6 +71,7 @@ public class KnowledgeAction extends ActionSupport implements ModelDriven<Knowle
 	}
 	public String del(){
 		if(knowledgeService.del(knowledge.getId())){
+			logService.add((Integer) session.get("id"), 2, "knowledge");
 			return "del_knowledge_success";
 		}else{
 			return "del_knowledge_fail";
@@ -87,6 +103,14 @@ public class KnowledgeAction extends ActionSupport implements ModelDriven<Knowle
 	public Knowledge getModel() {
 		// TODO Auto-generated method stub
 		return knowledge;
+	}
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = session;
 	}
 
 }

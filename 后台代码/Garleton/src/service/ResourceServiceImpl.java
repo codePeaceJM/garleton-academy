@@ -50,9 +50,19 @@ public class ResourceServiceImpl implements ResourceService {
 		return resourceList=(ArrayList<Resource>) resourceDAO.findAll();
 	}
 
-	public ArrayList<Resource> search(String name) {
+	public ArrayList<Resource> searchByName(String name) {
 		// TODO Auto-generated method stub
 		return resourceList=(ArrayList<Resource>) resourceDAO.findByName(name);
 	}
+	
 
+	public ArrayList<Resource> searchBySource(String source) {
+		// TODO Auto-generated method stub
+		return resourceList=(ArrayList<Resource>) resourceDAO.findBySource(source);
+	}
+
+	public ArrayList<Resource> searchByType(String type) {
+		// TODO Auto-generated method stub
+		return resourceList=(ArrayList<Resource>) resourceDAO.findByType(type);
+	}
 }

@@ -54,7 +54,6 @@ public class QuestionServiceImpl implements QuestionService {
 			questionDAO.update(q);
 		}catch(Exception e){
 			return false;
-	
 		}
 		return true;
 		
