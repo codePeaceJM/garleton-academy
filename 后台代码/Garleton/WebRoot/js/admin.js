@@ -1,3 +1,50 @@
+<<<<<<< HEAD
+(function(){
+	
+	if(window.start!=null){
+		
+		throw new Error("window.start is occupied");
+	
+	}
+	
+	var start = {
+		
+		
+		
+		addButtonListener:function(){
+		
+			this.addAdminBarListener();
+			this.addCategoryListener();
+			this.fuzzyMatch();
+			
+			
+		
+		},
+		
+			
+		addAdminBarListener:function(){
+	
+				$(".manage").mouseenter(function(){
+			
+					var ul = this.parentNode.getElementsByTagName('ul')[0];
+			
+					$(ul).show();
+			
+					$(this).mouseleave(function(){
+					
+						$(ul).hide();
+					
+						$(ul).mouseenter(function(){
+						
+							$(this).show();
+						
+							$(this).mouseleave(function(){
+							
+								$(this).hide();
+							
+							});
+						
+=======
 (function() {
 
 	if (window.start == null) {
@@ -55,6 +102,7 @@
 
 							$(this).hide();
 
+>>>>>>> origin/master
 						});
 
 					});
@@ -696,9 +744,37 @@
 			this.recordCategory();
 
 		}
+<<<<<<< HEAD
+	}
+
+	window.start = start;
+})();
+
+util.addLoad(start.configure.bind(start));
+
+util.addLoad(function(){
+	
+	var multCol = new window.multColumn(800,200,2,'main_block');
+
+			multCol.configure();
+=======
 
 	};
 
 })()
+>>>>>>> origin/master
 
-start.configure();
+			window.onscroll = function(ev){
+				ev = ev || window.event;
+
+				if(window.innerHeight+document.body.scrollTop+200>document.body.scrollHeight){
+
+					var arr = multCol.toLoad();
+
+					multCol.toArrange(arr);
+
+				}
+
+			}
+	
+});

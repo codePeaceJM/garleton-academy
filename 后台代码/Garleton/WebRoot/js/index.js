@@ -17,6 +17,7 @@
 		searchCategory:null,
 
 		setCurtain : function(ev) {
+			
 			function fix(ev) {
 				ev.preventDefault();
 			}
@@ -258,17 +259,17 @@
 		configure : function() {
 
 			
-			util.addLoad(this.getColumnArticle);
+			this.getColumnArticle();
 			
 			this.interval = setInterval(this.addLoad,this.freshInterval);
 			
-			util.addLoad(this.setCurtain);
-			util.addLoad(this.isIntegrity);
+			this.setCurtain();
+			this.isIntegrity();
 			
-			util.addLoad(this.addCategoryListener);
+			this.addCategoryListener();
 			
-			util.addLoad(this.recordCategory);
-			util.addLoad(this.fuzzyMatch);
+			this.recordCategory();
+			this.fuzzyMatch();
 			
 		}
 
@@ -277,4 +278,25 @@
 
 })();
 
-window.index.configure();
+util.addLoad(index.configure.bind(index));
+
+util.addLoad(function(){
+	
+	var multCol = new window.multColumn(800,200,2,'container');
+
+			multCol.configure();
+
+			window.onscroll = function(ev){
+				ev = ev || window.event;
+
+				if(window.innerHeight+document.body.scrollTop+200>document.body.scrollHeight){
+
+					var arr = multCol.toLoad();
+
+					multCol.toArrange(arr);
+
+				}
+
+			}
+	
+});

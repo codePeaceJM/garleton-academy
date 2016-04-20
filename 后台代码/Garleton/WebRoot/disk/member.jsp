@@ -3,8 +3,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,30 +109,97 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				
 				<li>
-					<a class="manage" href="">用户管理</a>
-					<ul id="userAction"> 
-						<li><a href="" class="query">查看用户</a></li>
-						<li><a href="" class="delete">删除用户</a></li>
+					<a class="manage" href="">栏目管理</a>
+					<ul id="columnAction"> 
+						<li><a href="" class="add">增加栏目</a></li>
+						<li><a href="" class="delete">删除栏目</a></li>
+						<li><a href="" class="query">查看栏目</a></li>
+						
 					</ul>
 				</li>
 				<li>
-					<a class="manage" href="" >机构管理</a>
-					<ul id="institutionAction">
-						<li><a href="" class="query">查看机构</a></li>
-						<li><a href="" class="add">新增机构</a></li>
-						<li><a href="" class="delete">删除机构</a></li>
+					<a class="manage" href="" >文章管理</a>
+					<ul id="articleAction">
+						<li><a href="" class="add">增加文章</a></li>
+						<li><a href="" class="delete">删除文章</a></li>
+						<li><a href="" class="query">查看文章</a></li>
+						<li><a href="" class="update">修改文章</a></li>
+						
 					</ul>
 				</li>
 				
 
 				
 				<li>
-					<a class="manage" href="">授权</a>
-					<ul id="authorizeAction">
-						<li><a href="" class="columnAuthorize">栏目</a></li>
-						<li><a href="" class="articleAuthorize">文章</a></li>
+					<a class="manage" href="">案例管理</a>
+					<ul id="casesAction">
+						<li><a href="" class="add">增加案例</a></li>
+						<li><a href="" class="query">查看案例</a></li>
+						<li><a href="" class="delete">删除案例</a></li>
 					</ul>
 				</li>
+				
+				<li>
+					<a class="manage" href="" >资源管理</a>
+					<ul id="ResourseAction">
+						<li><a href="" class="add">添加资源</a></li>
+						<li><a href="" class="query">查看资源</a></li>
+						<li><a href="" class="delete">删除资源</a></li>
+						
+					</ul>
+				</li>
+				
+				<li>
+					<a class="manage" href="" >安全知识</a>
+					<ul id="institutionAction">
+						<li><a href="" class="query">增加安全知识</a></li>
+						<li><a href="" class="add">删除安全知识</a></li>
+						<li><a href="" class="delete">修改安全知识</a></li>
+						<li><a href="" class="delete">查看安全知识</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a class="manage" href="" >安全法规</a>
+					<ul id="institutionAction">
+						<li><a href="" class="query">增加安全法规</a></li>
+						<li><a href="" class="add">删除安全法规</a></li>
+						<li><a href="" class="delete">修改安全法规</a></li>
+						<li><a href="" class="delete">查看安全法规</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a class="manage" href="" >课程管理</a>
+					<ul id="institutionAction">
+						<li><a href="" class="query">增加课程</a></li>
+						<li><a href="" class="add">删除课程</a></li>
+						<li><a href="" class="delete">修改课程</a></li>
+						<li><a href="" class="delete">查看课程</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a class="manage" href="" >试卷管理</a>
+					<ul id="institutionAction">
+						<li><a href="" class="query">增加试卷</a></li>
+						<li><a href="" class="add">删除试卷</a></li>
+						<li><a href="" class="delete">修改试卷</a></li>
+						<li><a href="" class="delete">查看试卷</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a class="manage" href="" >试题管理</a>
+					<ul id="institutionAction">
+						<li><a href="" class="query">增加试题</a></li>
+						<li><a href="" class="add">删除试题</a></li>
+						<li><a href="" class="delete">修改试题</a></li>
+						<li><a href="" class="delete">查看试题</a></li>
+					</ul>
+				</li>
+				
+				
 				
 				<li><a href="" id="log_out">Log Out</a></li>
 	
@@ -169,9 +234,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="/Garleton/jquery.1.12.1-min.js"></script>
 	<script src="/Garleton/bootstrap3.3.6/dist/js/bootstrap.min.js"></script>
 	<script src="/Garleton/js/util/util.js"></script>
+	<script src="/Garleton/js/member.js"></script>
+	
 	<script src="/Garleton/js/pubuliu.js"></script>
-	<script src="/Garleton/js/admin.js"></script>
-
 	
 </body>
 </html>

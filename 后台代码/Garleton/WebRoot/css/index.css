@@ -5,8 +5,9 @@
 }
 
 body {
-	background:url("/Garleton/img/gray017.png");
-	opacity:0.9;
+	
+	background:#F0E68C;
+
 }
 
 a {
@@ -27,13 +28,14 @@ ul{
 /* header style set */
 
 #header {
+	
 	width:100%;
 	height:480px;
 	
 } 
 
 #top_info{
-	height:36px;
+	
 }
 
 #carousel {
@@ -99,6 +101,21 @@ ul{
 	padding-left:20px;
 }
 
+#nav_bar .sign input{
+	display:inline-block;
+	height:1em;
+	width:100%;
+	border:none;
+	
+}
+#nav_bar .sign input:focus {
+	outline:none;
+}
+
+#nav_bar .sign li ul li{
+	width:150%;
+}
+
 #log_out{
 
 	padding-right:30px;
@@ -116,11 +133,9 @@ ul{
 #wrapper {
 
 	width:1150px;
-	border:1px solid gray;
 	margin:0 auto;
 	overflow: hidden;
 }
-
 
 /* article style set */
 article {

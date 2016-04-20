@@ -16,9 +16,12 @@
 				}
 
 				if(typeof container === 'string'){
-					container = document.getElementById(container);
+					this.container = document.getElementById(container);
 				}
-				this.container = container;
+
+				if($("#"+container+" input")[0]!=null){
+					return;
+				}
 
 				for(var i = 0 ; i< this.colNum;i++){
 					var div = document.createElement('div');
@@ -26,7 +29,7 @@
 					div.id="col-"+(i+1);
 					var width = parseInt(100/this.colNum)-2;
 					div.style.width = width+'%';
-					container.appendChild(div);
+					this.container.appendChild(div);
 					this['col_'+(i+1)] = {
 						height:div.offsetHeight
 					};
@@ -151,23 +154,3 @@
 
 		})()
 
-util.addLoad(function(){
-	
-	var multCol = new window.multColumn(800,200,2,'container');
-
-			multCol.configure();
-
-			window.onscroll = function(ev){
-				ev = ev || window.event;
-
-				if(window.innerHeight+document.body.scrollTop+200>document.body.scrollHeight){
-
-					var arr = multCol.toLoad();
-
-					multCol.toArrange(arr);
-
-				}
-
-			}
-	
-});
