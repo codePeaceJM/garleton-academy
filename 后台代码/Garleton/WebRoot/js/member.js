@@ -232,36 +232,56 @@
 					$("#main_block header").html("增加栏目：").after(content);
 
 					var name = $("<input>",{"name":"name","type":"text","placeholder":"name"});
-					var institution = $("<input>",{"name":"institution","type":"text","placeholder":"institution"});
-					var description = $("<input>",{"name":"description","type":"text","placeholder":"description"});
-					var icon = $("<input>",{"name":"icon","type":"file","placeholder":"icon"});
+					var institution = $("<input>",{"name":"institute","type":"text","placeholder":"institution"});
+					var description = $("<input>",{"name":"column.description","type":"text","placeholder":"description"});
+					var icon = $("<input>",{"name":"file","type":"file","placeholder":"icon"});
+					var keyword = $("<input>",{"name":"keyword","type":"text","placeholder":"keyword"});
 
 					var submit = $("<a>",{
 						href:"#",
 						"class":"submit",
 						click:function(e){
 							var isOut = false;
-							var arr= [];
+							var formData = new FormData();
 							e.preventDefault();
 							$("#content input").each(function(index,ele){
-								if(ele.value==""){
-									alert("请输入完整");
-									isOut = true;
-									return false;
+								var i=0;
+								if($(ele).attr("type")!="file"){
+									
+									console.log("input"+(i++));
+									if(ele.value==""){
+										alert("请输入完整");
+										
+										isOut = true;
+										return false;
+									}
+									formData.append(ele.name,ele.value);
+									
+								}else{
+									if(ele.files==null){
+										alert("请输入完整");
+										isOut = true;
+										return false;
+									}
+									console.log(ele.name);
+									formData.append(ele.name,ele.files[0]);
+
 								}
-								arr.push(ele.name+"="+ele.value);
+								
 								
 							});
+							alert("pass");
 							if(isOut){
 								return;
 							}
-							var dataList = arr.join("&");
 							$.ajax({
 								type:"post",
-								url:"",
+								url:"columnAction!add",
 								async:true,
-								data:dataList,
+								data:formData,
 								dataType:"json",
+								processData: false,
+						        contentType: false,
 								success:function(data){
 									if(data.text!="success"){
 										alert("添加栏目失败");
@@ -294,6 +314,7 @@
 					$("#content").append(name)
 						.append(institution)
 						.append(description)
+						.append(keyword)
 						.append(icon)
 						.append(submit)
 						.append(cancel);
@@ -428,12 +449,12 @@
 							var dataList = arr.join("&");
 							$.ajax({
 								type:"post",
-								url:"",
+								url:"columnAction!search",
 								async:true,
 								data:dataList,
 								dataType:"json",
 								success:function(data){
-									if(data.text!="success"){
+									if(data.text=="failed"){
 										alert("查询栏目失败");
 										$("#content input").each(function(index,ele){
 											ele.val("");
@@ -441,6 +462,181 @@
 									}else{
 										$("#content").empty();
 
+										if(data instanceof Array){
+											
+											if(data.length == 0){
+												
+												$("#content").html("您查询的内容为空");
+												
+											}else{
+												
+												var ul = $("<ul>");
+												
+												for(var i=0;i<data.length;i++){
+													var article = $("<li>");
+													article.append($("<h2>").append($("<span>",{
+														text:data[i].name
+													})).append($("<img>",{
+														src:data[i].icon
+													})))
+													.append($("<p>").append($("<span>",{
+														text:data[i].publisher
+													})).append($("<span>",{
+														text:data[i].publishtime
+													})))
+													.append($("<p>",{
+														text:data[i].description
+													})
+													.append($("<a>",{
+														text:"删除",
+														click:function(e){
+															e.preventDefault();
+															var that = this;
+															(function(i){
+																$.ajax({
+																	type:"post",
+																	url:"",
+																	async:true,
+																	data:{"id":data[i].id},
+																	dataType:"json",
+																	success:function(data){
+																		if(data.text=="success"){
+																			
+																			
+																			$(that).parent().remove();
+																			
+																		}else{
+																			
+																			alert("删除失败");
+																			
+																		}
+																	}
+																});
+															})(i)
+															
+														}
+													}))
+													.append($("<a>",{
+														text:"修改",
+														click:function(e){
+															e.preventDefault();
+															
+															var that = this;
+															
+															(function(i){
+																
+																var display =null;
+																
+																var name = $("<input>",{"name":"name","type":"text","placeholder":"name"}).val(data[i].name);
+																var institution = $("<input>",{"name":"institute","type":"text","placeholder":"institution"}).val(data[i].institution);
+																var description = $("<input>",{"name":"column.description","type":"text","placeholder":"description"}).val(data[i].description);
+																var img = $("<img>",{
+																	src:data[i].icon
+																});
+																var icon = $("<input>",{"name":"file","type":"file","placeholder":"icon"});
+																var keyword = $("<input>",{"name":"keyword","type":"text","placeholder":"keyword"}).val(data[i].keyword);
+
+																var submit = $("<a>",{
+																	href:"#",
+																	"class":"submit",
+																	click:function(e){
+																		var isOut = false;
+																		var formData = new FormData();
+																		e.preventDefault();
+																		$(that).parent().children("input").each(function(index,ele){
+																			var i=0;
+																			if($(ele).attr("type")!="file"){
+																				
+																				console.log("input"+(i++));
+																				if(ele.value==""){
+																					alert("请输入完整");
+																					
+																					isOut = true;
+																					return false;
+																				}
+																				formData.append(ele.name,ele.value);
+																				
+																			}else{
+																				if(ele.files==null){
+																					alert("请输入完整");
+																					isOut = true;
+																					return false;
+																				}
+																				console.log(ele.name);
+																				formData.append(ele.name,ele.files[0]);
+
+																			}
+																			
+																			
+																		});
+																
+																		if(isOut){
+																			return;
+																		}
+																		$.ajax({
+																			type:"post",
+																			url:"",
+																			async:true,
+																			data:formData,
+																			dataType:"json",
+																			processData: false,
+																	        contentType: false,
+																			success:function(data){
+																				if(data.text!="success"){
+																					alert("修改栏目失败");
+																					$("#content input").each(function(index,ele){
+																						ele.val("");
+																					});									
+																				}else{
+																					alert("修改栏目成功");
+																					$("#content input").each(function(index,ele){
+																						ele.val("");
+																					});	
+																				}
+																			},
+																		});
+																		
+																	},
+																}).text("提交");
+																var cancel = $("<a>",{
+																	href:"#",
+																	"class":"cancel",
+																	click:function(e){
+																		e.preventDefault();
+																		
+																		
+																	}
+																}).text("取消");
+
+																
+																$(that).parent().empty().append(name)
+																	.append(institution)
+																	.append(description)
+																	.append(keyword)
+																	.append(img)
+																	.append(icon)
+																	.append(submit)
+																	.append(cancel);
+																
+																
+
+																
+															})(i);
+															
+														}
+													}))).appendTo(ul);
+													
+													
+												}
+												
+												ul.appendTo($("#content").empty());
+												
+											}
+											
+										}else{
+											alert("数据格式不对");
+										}
+										
 										//to display the data to #content
 										//...
 									}

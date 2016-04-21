@@ -63,7 +63,7 @@ public class InstitutionAction extends ActionSupport implements SessionAware,
 		HttpServletResponse response = (HttpServletResponse) ActionContext
 				.getContext().get(ServletActionContext.HTTP_RESPONSE);
 		response.setCharacterEncoding("UTF-8");
-		System.out.println(institution.getId());
+//		System.out.println(institution.getId());
 		if (institutionService.del(institution.getId())) {
 			logService.add((Integer) session.get("id"), 2, "institution");
 			JSONObject jobject = JSONObject.fromObject("{text:'删除成功'}");

@@ -105,7 +105,7 @@ public class UserDAO extends HibernateDaoSupport {
 				+ ", value: " + value);
 		try {
 			String queryString = "from User as model where model."
-					+ propertyName + "= ?";
+					+ propertyName + " like ?";
 			return getHibernateTemplate().find(queryString, value);
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);

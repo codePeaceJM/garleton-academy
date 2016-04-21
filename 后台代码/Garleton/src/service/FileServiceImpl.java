@@ -11,24 +11,27 @@ public class FileServiceImpl implements FileService {
 
 	public String upload(File file, String path, String extension) {
 		// TODO Auto-generated method stub
-		String fileName="";
+		String fileName = "";
 		try {
 			if (file != null) {
-				String dir = ServletActionContext.getRequest().getRealPath(path);
-				//System.out.println(dir);
+				String dir = ServletActionContext.getRequest()
+						.getRealPath(path);
+				// System.out.println(dir);
 				File fileLoaction = new File(dir);
 				if (!fileLoaction.exists()) {
 					fileLoaction.mkdirs();
 				}
-				fileName=UUID.randomUUID().toString().replace("-", "")+extension;
+				fileName = UUID.randomUUID().toString().replace("-", "")
+						+ extension;
 				File uploadFile = new File(dir, fileName);
-				while(uploadFile.exists()){
-					fileName=UUID.randomUUID().toString().replace("-", "")+extension;
+				while (uploadFile.exists()) {
+					fileName = UUID.randomUUID().toString().replace("-", "")
+							+ extension;
 					uploadFile = new File(dir, fileName);
 				}
-				FileUtils.copyFile(file, uploadFile);	
+				FileUtils.copyFile(file, uploadFile);
 			}
-			return fileName;
+			return "/Garleton" + path + "/" + fileName;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

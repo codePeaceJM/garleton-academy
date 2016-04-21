@@ -62,7 +62,7 @@
 	<bean id="columnAction" class="action.ColumnAction" scope="prototype">
 		<property name="columnService" ref="columnService" />
 		<property name="logService" ref="logService" />
-
+		<property name="fileService" ref="fileService" />
 	</bean>
 	<bean id="newsAction" class="action.NewsAction" scope="prototype">
 		<property name="newsService" ref="newsService" />

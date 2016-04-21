@@ -17,7 +17,7 @@
             <column name="name" length="20" />
         </property>
         <property name="icon" type="java.lang.String">
-            <column name="icon" length="50" />
+            <column name="icon" />
         </property>
         <property name="description" type="java.lang.String">
             <column name="description" />

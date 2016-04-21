@@ -1,5 +1,6 @@
 package action;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -18,16 +20,56 @@ import com.opensymphony.xwork2.ModelDriven;
 import entity.Column;
 
 import service.ColumnService;
+import service.FileService;
 import service.LogService;
 
-public class ColumnAction extends ActionSupport implements SessionAware,ModelDriven<Column>{
+public class ColumnAction extends ActionSupport implements SessionAware,
+		ModelDriven<Column> {
 	LogService logService;
 	ColumnService columnService;
+	FileService fileService;
 	ArrayList<Column> columnList;
 	private Column column = new Column();
 	private Map<String, Object> session;
-	
-	
+
+	private File file;
+
+	private String fileFileName;
+
+	private String fileContentType;
+
+	public FileService getFileService() {
+		return fileService;
+	}
+
+	public void setFileService(FileService fileService) {
+		this.fileService = fileService;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
 	public Column getColumn() {
 		return column;
 	}
@@ -51,51 +93,94 @@ public class ColumnAction extends ActionSupport implements SessionAware,ModelDri
 	public void setColumnList(ArrayList<Column> columnList) {
 		this.columnList = columnList;
 	}
-	public String add(){
-				
-		if(columnService.add(column)){
+
+	public void add() {
+		System.out.println("hello");
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		column.setPublisher((String) session.get("name"));
+		int index = fileFileName.lastIndexOf(".");
+		String extension = fileFileName.substring(index);
+		column.setIcon(fileService.upload(file, "/icon", extension));
+		if (columnService.add(column)) {
 			logService.add((Integer) session.get("id"), 1, "column");
-			return "add_column_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		else
-			return "add_column_fail";
 	}
-	public String del(){
-		if(columnService.del(column.getId())){
+
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (columnService.del(column.getId())) {
 			logService.add((Integer) session.get("id"), 2, "column");
-		
-			return "del_column_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		else
-			return "del_column_fail";
 	}
-	public String search(){
-		if("".equals(column.getName())||column.getName()==null){
-			columnList=columnService.searchAll();
-		}else{
-			columnList=columnService.search(column.getName());
+
+	public void search() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if ("".equals(column.getName()) || column.getName() == null) {
+			columnList = columnService.searchAll();
+		} else {
+			columnList = columnService.search(column.getName());
 		}
-		if(columnList.isEmpty()){
-			return "search_column_fail";
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(columnList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		if (columnList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(columnList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_column_success";
 		}
 	}
-	public String update(){
-		
-		if(columnService.update(column)){
+
+	public String update() {
+
+		if (columnService.update(column)) {
 			logService.add((Integer) session.get("id"), 3, "column");
 			return "update_column_success";
-		}else{
+		} else {
 			return "update_column_fail";
 		}
 	}
@@ -121,6 +206,5 @@ public class ColumnAction extends ActionSupport implements SessionAware,ModelDri
 		// TODO Auto-generated method stub
 		this.session = session;
 	}
-	
 
 }
