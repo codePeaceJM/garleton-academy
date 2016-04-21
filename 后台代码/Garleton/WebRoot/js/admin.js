@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 (function(){
 	
 	if(window.start!=null){
@@ -11,76 +10,29 @@
 		
 		
 		
-		addButtonListener:function(){
 		
+						
+		addButtonListener : function() {
+
 			this.addAdminBarListener();
 			this.addCategoryListener();
 			this.fuzzyMatch();
-			
-			
-		
-		},
-		
-			
-		addAdminBarListener:function(){
-	
-				$(".manage").mouseenter(function(){
-			
-					var ul = this.parentNode.getElementsByTagName('ul')[0];
-			
-					$(ul).show();
-			
-					$(this).mouseleave(function(){
-					
-						$(ul).hide();
-					
-						$(ul).mouseenter(function(){
-						
-							$(this).show();
-						
-							$(this).mouseleave(function(){
-							
-								$(this).hide();
-							
-							});
-						
-=======
-(function() {
-
-	if (window.start == null) {
-
-		window.start = {};
-
-	} else {
-
-		console.log("window.start is occupied");
-
-	}
-
-	start = {
-
-		addButtonListener : function() {
-
-			util.addLoad(this.addAdminBarListener);
-			util.addLoad(this.addCategoryListener);
-			util.addLoad(this.addCategoryListener);
-			util.addLoad(this.fuzzyMatch);
 
 		},
 
-		addCategoryListener : function() {
-			$(".search_rule").mouseenter(function() {
+		// addCategoryListener : function() {
+		// 	$(".search_rule").mouseenter(function() {
 
-				$(".category ul").show();
+		// 		$(".category ul").show();
 
-				$(".category ul").mouseleave(function() {
+		// 		$(".category ul").mouseleave(function() {
 
-					$(".category ul").hide();
+		// 			$(".category ul").hide();
 
-				});
+		// 		});
 
-			});
-		},
+		// 	});
+		// },
 
 		addAdminBarListener : function() {
 
@@ -102,7 +54,6 @@
 
 							$(this).hide();
 
->>>>>>> origin/master
 						});
 
 					});
@@ -131,8 +82,7 @@
 		addAuthorizeAction : function() {
 
 			$("#authorizeAction .columnAuthorize").click(this.authorizeColumn);
-			$("#authorizeAction .articleAuthorize")
-					.click(this.authorizeArticle);
+			$("#authorizeAction .articleAuthorize").click(this.authorizeArticle);
 
 		},
 
@@ -744,7 +694,7 @@
 			this.recordCategory();
 
 		}
-<<<<<<< HEAD
+
 	}
 
 	window.start = start;
@@ -756,25 +706,19 @@ util.addLoad(function(){
 	
 	var multCol = new window.multColumn(800,200,2,'main_block');
 
-			multCol.configure();
-=======
+	multCol.configure();
 
-	};
+	window.onscroll = function(ev){
+		ev = ev || window.event;
 
-})()
->>>>>>> origin/master
+		if(window.innerHeight+document.body.scrollTop+200>document.body.scrollHeight){
 
-			window.onscroll = function(ev){
-				ev = ev || window.event;
+			var arr = multCol.toLoad();
 
-				if(window.innerHeight+document.body.scrollTop+200>document.body.scrollHeight){
+			multCol.toArrange(arr);
 
-					var arr = multCol.toLoad();
+		}
 
-					multCol.toArrange(arr);
-
-				}
-
-			}
+	}
 	
 });
