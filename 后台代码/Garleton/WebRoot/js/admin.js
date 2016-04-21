@@ -9,7 +9,9 @@
 	var start = {
 		
 		
-		
+		isPresent:true,
+		present:null,
+
 		
 						
 		addButtonListener : function() {
@@ -91,7 +93,16 @@
 			ev.preventDefault();
 
 			$("#main_block header").html("");
-			$("#content").empty();
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("授权栏目管理：");
 
@@ -137,9 +148,11 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
+
+				$("#content").remove();
+				$("#main_block").append(start.present);
+				start.isPresent=true;
 
 			});
 
@@ -152,7 +165,18 @@
 			ev.preventDefault();
 
 			$("#main_block header").html("");
-			$("#content").empty();
+			
+			$("#main_block header").html("");
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("授权文章管理：");
 
@@ -198,10 +222,11 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
 
+				$("#content").remove();
+				$("#main_block").append(start.present);
+				start.isPresent=true;
 			});
 
 			$("#content").append(person).append(submit).append(cancel);
@@ -210,9 +235,18 @@
 
 		queryUser : function(ev) {
 			ev.preventDefault();
-
+			
 			$("#main_block header").html("");
-			$("#content").empty();
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("查看用户：");
 
@@ -252,9 +286,12 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
+
+				$("#content").remove();
+				$("#main_block").append(start.present);
+
+				start.isPresent=true;
 
 			});
 
@@ -264,9 +301,18 @@
 		deleteUser : function(ev) {
 
 			ev.preventDefault();
-
+			
 			$("#main_block header").html("");
-			$("#content").empty();
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("删除用户：");
 
@@ -306,9 +352,11 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
+
+				$("#content").remove();
+				$("#main_block").append(start.present);
+				start.isPresent=true;
 
 			});
 
@@ -320,7 +368,18 @@
 			ev.preventDefault();
 
 			$("#main_block header").html("");
-			$("#content").empty();
+			
+			$("#main_block header").html("");
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("查询机构：");
 
@@ -359,9 +418,10 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
+				$("#content").remove();
+				$("#main_block").append(start.present);
+				start.isPresent=true;
 
 			});
 
@@ -373,7 +433,18 @@
 			ev.preventDefault();
 
 			$("#main_block header").html("");
-			$("#content").empty();
+			
+			$("#main_block header").html("");
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("增加机构：");
 
@@ -531,9 +602,11 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
+
+				$("#content").remove();
+				$("#main_block").append(start.present);
+				start.isPresent=true;
 
 			});
 
@@ -543,9 +616,18 @@
 		deleteInstitution : function(ev) {
 
 			ev.preventDefault();
-
+			
 			$("#main_block header").html("");
-			$("#content").empty();
+			if(start.isPresent){
+				start.isPresent = false;
+				start.present = $("#content").detach();
+			}else{
+				$("#content").remove();
+			}
+
+			$("<div>",{
+					id:"content"
+				}).appendTo($("#main_block"));
 
 			$("#main_block header").html("删除机构：");
 
@@ -584,9 +666,11 @@
 
 				ev.preventDefault();
 
-				$("#content").empty();
-
 				$("#main_block header").html("");
+
+				$("#content").remove();
+				$("#main_block").append(start.present);
+				start.isPresent=true;
 
 			});
 
@@ -704,7 +788,7 @@ util.addLoad(start.configure.bind(start));
 
 util.addLoad(function(){
 	
-	var multCol = new window.multColumn(800,200,2,'main_block');
+	var multCol = new window.multColumn(800,200,2,'content');
 
 	multCol.configure();
 
