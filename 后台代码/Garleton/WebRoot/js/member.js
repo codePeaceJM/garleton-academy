@@ -425,7 +425,7 @@
 					
 					$("#main_block header").html("查询栏目：").after(content);
 
-					var id = $("<input>",{"name":"id","type":"text","placeholder":"id"});
+					var id = $("<input>",{"name":"name","type":"text","placeholder":"name"});
 					
 					var submit = $("<a>",{
 						href:"#",
@@ -476,6 +476,7 @@
 												
 												for(var i=0;i<data.length;i++){
 													var article = $("<li>");
+													
 
 													(function(i){
 													article.append($("<h2>").append($("<span>",{
@@ -499,15 +500,16 @@
 															(function(i){
 																$.ajax({
 																	type:"post",
-																	url:"",
+																	url:"columnAction!del",
 																	async:true,
 																	data:{"id":data[i].id},
 																	dataType:"json",
 																	success:function(data){
+																		$("#main_block header").html("查看栏目：");
 																		if(data.text=="success"){
 																			
-																			
-																			$(that).parent().remove();
+																			alert("删除成功");
+																			$(that).parent().parent().remove();
 																			
 																		}else{
 																			
@@ -528,11 +530,13 @@
 															var that = this;
 																
 																var display =null;
-																var parent =$(that).parent();
+																var parent =$(that).parent().parent();
+																
+																$("#main_block header").html("修改栏目：");
 																
 																var name = $("<input>",{"name":"name","type":"text","placeholder":"name"}).val(data[i].name);
-																var institution = $("<input>",{"name":"institute","type":"text","placeholder":"institution"}).val(data[i].institution);
-																var description = $("<input>",{"name":"column.description","type":"text","placeholder":"description"}).val(data[i].description);
+																var institution = $("<input>",{"name":"institute","type":"text","placeholder":"institution"}).val(data[i].institute);
+																var description = $("<input>",{"name":"description","type":"text","placeholder":"description"}).val(data[i].description);
 																var img = $("<img>",{
 																	src:data[i].icon
 																});
@@ -545,8 +549,9 @@
 																	click:function(e){
 																		var isOut = false;
 																		var formData = new FormData();
+																		formData.append("id",data[i].id);
 																		e.preventDefault();
-																		$(that).parent().children("input").each(function(index,ele){
+																		parent.children("input").each(function(index,ele){
 																			var i=0;
 																			if($(ele).attr("type")!="file"){
 																				
@@ -557,6 +562,7 @@
 																					return false;
 																				}
 																				formData.append(ele.name,ele.value);
+																				console.log(ele.name+ele.value);
 																				
 																			}else{
 																				if(ele.files.length==0){
@@ -564,7 +570,7 @@
 																					isOut = true;
 																					return false;
 																				}
-																				console.log(ele.name);
+																				console.log(ele.files[0]);
 																				formData.append(ele.name,ele.files[0]);
 
 																			}
@@ -575,13 +581,17 @@
 																		if(isOut){
 																			return;
 																		}
+																		
+																		console.log(formData);
 																		$.ajax({
 																			type:"post",
-																			url:"",
+																			url:"columnAction!update",
 																			async:true,
+																			processData: false,
+																			contentType: false,
 																			data:formData,
 																			dataType:"json",
-																			processData: false,
+																			
 																			success:function(data){
 																				if(data.text!="success"){
 																					alert("修改栏目失败");

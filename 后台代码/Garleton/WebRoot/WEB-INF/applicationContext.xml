@@ -67,6 +67,7 @@
 	<bean id="newsAction" class="action.NewsAction" scope="prototype">
 		<property name="newsService" ref="newsService" />
 		<property name="logService" ref="logService" />
+		<property name="fileService" ref="fileService" />
 	</bean>
 	<bean id="commentAction" class="action.CommentAction" scope="prototype">
 		<property name="commentService" ref="commentService" />

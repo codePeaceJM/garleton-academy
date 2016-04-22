@@ -167,7 +167,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       out.write("\t\t\t\t\t<a class=\"manage\" href=\"\">栏目管理</a>\r\n");
       out.write("\t\t\t\t\t<ul id=\"columnAction\"> \r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"\" class=\"add\">增加栏目</a></li>\r\n");
-      out.write("\t\t\t\t\t\t<li><a href=\"\" class=\"delete\">删除栏目</a></li>\r\n");
       out.write("\t\t\t\t\t\t<li><a href=\"\" class=\"query\">查看栏目</a></li>\r\n");
       out.write("\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t</ul>\r\n");

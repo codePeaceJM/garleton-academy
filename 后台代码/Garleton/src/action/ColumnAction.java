@@ -95,7 +95,6 @@ public class ColumnAction extends ActionSupport implements SessionAware,
 	}
 
 	public void add() {
-		// System.out.println("hello");
 		HttpServletResponse response = (HttpServletResponse) ActionContext
 				.getContext().get(ServletActionContext.HTTP_RESPONSE);
 		response.setCharacterEncoding("UTF-8");
@@ -176,7 +175,6 @@ public class ColumnAction extends ActionSupport implements SessionAware,
 	}
 
 	public void update() {
-		System.out.println("UPDATE");
 		HttpServletResponse response = (HttpServletResponse) ActionContext
 				.getContext().get(ServletActionContext.HTTP_RESPONSE);
 		response.setCharacterEncoding("UTF-8");

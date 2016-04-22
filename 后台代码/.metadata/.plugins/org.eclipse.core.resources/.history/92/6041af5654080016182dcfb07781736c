@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<package name="default" extends="struts-default">
+	<interceptors>
+		<interceptor name="ac" class="interceptor.AccessController"/>
+		<interceptor-stack name="acStack">    
+            <interceptor-ref name="defaultStack"/>   
+            <interceptor-ref name="ac"/>   
+		</interceptor-stack>  
+	</interceptors>
+	<default-interceptor-ref name="acStack"/>
+	<global-results>
+		<result name="authorityDeny">/MyJsp.jsp</result>
+	</global-results>
+	<action name="userAction" class="userAction">
+		<result name="log_admin_success">/disk/administrator.jsp</result>
+		<result name="log_fail">/MyJsp.jsp</result>
+		<result name="reg_success">/MyJsp.jsp</result>
+		<result name="reg_fail">/error.jsp</result>
+	</action>
+	<action name = "districtAction" class="districtAction">
+		<result name = "add_district_success">/index.jsp</result>
+		<result name = "add_district_fail">/index.jsp</result>
+		<result name = "del_district_success">/index.jsp</result>
+		<result name = "del_district_fail">/index.jsp</result>
+		<result name = "search_district_success">/index.jsp</result>
+		<result name = "search_district_fail">/index.jsp</result>	
+	</action>
+	<action name="institutionAction" class="institutionAction" />
+	<action name = "columnAction" class="columnAction">
+		<result name = "add_column_success">/index.jsp</result>
+		<result name = "add_column_fail">/index.jsp</result>
+		<result name = "del_column_success">/index.jsp</result>
+		<result name = "del_column_fail">/index.jsp</result>
+		<result name = "search_column_success">/index.jsp</result>
+		<result name = "search_column_fail">/index.jsp</result>
+		<result name = "update_column_success">/index.jsp</result>
+		<result name = "update_column_fail">/index.jsp</result>
+	</action>
+	<action name = "newsAction" class="newsAction">
+		<result name = "add_news_success">/index.jsp</result>
+		<result name = "add_news_fail">/index.jsp</result>
+		<result name = "del_news_success">/index.jsp</result>
+		<result name = "del_news_fail">/index.jsp</result>
+		<result name = "search_news_success">/index.jsp</result>
+		<result name = "search_news_fail">/index.jsp</result>
+		<result name = "update_news_success">/index.jsp</result>
+		<result name = "update_news_fail">/index.jsp</result>
+	</action>
+	<action name = "commentAction" class="commentAction">
+		<result name = "add_comment_success">/index.jsp</result>
+		<result name = "add_comment_fail">/index.jsp</result>
+		<result name = "del_comment_success">/index.jsp</result>
+		<result name = "del_comment_fail">/index.jsp</result>
+	</action>
+	<action name="casesAction" class="casesAction">
+		<result name="add_cases_success">/index.jsp</result>
+		<result name="add_cases_fail">/index.jsp</result>
+		<result name="del_cases_success">/index.jsp</result>
+		<result name="del_cases_fail">/index.jsp</result>
+		<result name="search_cases_success">/index.jsp</result>
+		<result name="search_cases_fail">/index.jsp</result>
+	</action>
+	<action name="resourceAction" class="resourceAction">
+		<result name="add_resource_success">/index.jsp</result>
+		<result name="add_resource_fail">/index.jsp</result>
+		<result name="del_resource_success">/index.jsp</result>
+		<result name="del_resource_fail">/index.jsp</result>
+		<result name="search_resource_success">/index.jsp</result>
+		<result name="search_resource_fail">/index.jsp</result>
+	</action>
+	<action name="knowledgeAction" class="knowledgeAction">
+		<result name="add_knowledge_success">/index.jsp</result>
+		<result name="add_knowledge_fail">/index.jsp</result>
+		<result name="del_knowledge_success">/index.jsp</result>
+		<result name="del_knowledge_fail">/index.jsp</result>
+		<result name="search_knowledge_success">/index.jsp</result>
+		<result name="search_knowledge_fail">/index.jsp</result>
+	</action>
+	<action name="statuteAction" class="statuteAction">
+		<result name="add_statute_success">/index.jsp</result>
+		<result name="add_statute_fail">/index.jsp</result>
+		<result name="del_statute_success">/index.jsp</result>
+		<result name="del_statute_fail">/index.jsp</result>
+		<result name="search_statute_success">/index.jsp</result>
+		<result name="search_statute_fail">/index.jsp</result>
+	</action>
+	<action name="courseAction" class="courseAction">
+		<result name="add_course_success">/index.jsp</result>
+		<result name="add_course_fail">/index.jsp</result>
+		<result name="del_course_success">/index.jsp</result>
+		<result name="del_course_fail">/index.jsp</result>
+		<result name="search_course_success">/index.jsp</result>
+		<result name="search_course_fail">/index.jsp</result>
+		<result name="update_course_success">/index.jsp</result>
+		<result name="update_course_fail">/index.jsp</result>
+	</action>
+	<action name="questionAction" class="questionAction">
+		<result name="add_question_success">/index.jsp</result>
+		<result name="add_question_fail">/index.jsp</result>
+		<result name="update_question_success">/index.jsp</result>
+		<result name="update_question_fail">/index.jsp</result>
+		<result name="search_question_success">/index.jsp</result>
+		<result name="search_question_fail">/index.jsp</result>
+	</action>
+	<action name="paperAction" class="paperAction">
+		<result name="add_paper_success">/index.jsp</result>
+		<result name="add_paper_fail">/index.jsp</result>
+		<result name="del_paper_success">/index.jsp</result>
+		<result name="del_paper_fail">/index.jsp</result>
+		<result name="search_paper_success">/index.jsp</result>
+		<result name="search_paper_fail">/index.jsp</result>
+		<result name="update_paper_success">/index.jsp</result>
+		<result name="update_paper_fail">/index.jsp</result>
+	</action>
+	<action name="expertAction" class="expertAction">
+		<result name="add_expert_success">/index.jsp</result>
+		<result name="add_expert_fail">/index.jsp</result>
+		<result name="del_expert_success">/index.jsp</result>
+		<result name="del_expert_fail">/index.jsp</result>
+		<result name="search_expert_success">/index.jsp</result>
+		<result name="search_expert_fail">/index.jsp</result>
+		<result name="update_expert_success">/index.jsp</result>
+		<result name="update_expert_fail">/index.jsp</result>
+	</action>
+	<action name="logAction" class="logAction">
+		<result name="test">/index.jsp</result>
+	</action>
+</package>
+</struts>    

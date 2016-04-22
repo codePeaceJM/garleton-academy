@@ -639,3 +639,15 @@ java.nio.channels.ClosedChannelException
 
 !ENTRY org.eclipse.ui 4 4 2016-04-22 12:42:37.638
 !MESSAGE Part already exists in page layout: org.eclipse.debug.ui.ExpressionView.
+
+!ENTRY org.eclipse.osgi 2 1 2016-04-22 14:31:38.312
+!MESSAGE NLS unused message: WizardNewFileCreationPage_title in: com.genuitec.eclipse.springframework.messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-04-22 14:31:38.313
+!MESSAGE NLS unused message: WizardNewFileCreationPage_errorTitle in: com.genuitec.eclipse.springframework.messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-04-22 14:31:38.314
+!MESSAGE NLS unused message: WizardNewFileCreationPage_internalErrorTitle in: com.genuitec.eclipse.springframework.messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-04-22 14:31:38.314
+!MESSAGE NLS unused message: WizardNewFileCreationPage_internalErrorMessage in: com.genuitec.eclipse.springframework.messages

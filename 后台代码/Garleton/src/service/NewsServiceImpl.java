@@ -66,6 +66,9 @@ public class NewsServiceImpl implements NewsService {
 	public boolean update(News n) {
 		// TODO Auto-generated method stub
 		try{
+			Date date = new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			n.setPublishTime(sdf.format(date));
 			newsDAO.update(n);
 		}catch(Exception e){
 			return false;
