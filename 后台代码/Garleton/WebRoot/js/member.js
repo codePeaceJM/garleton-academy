@@ -474,6 +474,8 @@
 												
 												for(var i=0;i<data.length;i++){
 													var article = $("<li>");
+
+													(function(i){
 													article.append($("<h2>").append($("<span>",{
 														text:data[i].name
 													})).append($("<img>",{
@@ -522,8 +524,6 @@
 															e.preventDefault();
 															
 															var that = this;
-															
-															(function(i){
 																
 																var display =null;
 																var parent =$(that).parent();
@@ -618,15 +618,14 @@
 																	.append(icon)
 																	.append(submit)
 																	.append(cancel);
-																
-																
-
-																
-															})(i);
+	
 															
 														}
 													}))).appendTo(ul);
+
+													})(i);
 													
+
 													
 												}
 												
