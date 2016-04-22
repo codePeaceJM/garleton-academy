@@ -1,0 +1,36 @@
+#container,.column,.column div,.column h3 {
+			padding:0;
+			margin:0;
+		}
+
+#container {
+	margin-top:30px;
+position:relative;
+}
+
+		#container:after {
+			
+			display:block;
+			visibility:hidden;
+			content:"";
+			height:"";
+			clear:both;
+
+		}
+
+		.column {
+			float:left;
+			padding:20px 0;
+		}
+
+		.column div {
+			margin:20px 10px 0;
+			padding:10px;
+			border:1px solid gray;
+		}
+
+		.column h3{
+			color:green;
+			font-weight:bold;
+			font-family:sans-serif;
+		}

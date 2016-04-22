@@ -1,0 +1,52 @@
+/*  */
+
+
+#nav_bar ul li {
+	position:relative;
+}
+
+#nav_bar ul li ul {
+	padding-top:24px;
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	display:none;
+}
+
+#nav_bar ul li ul li:last-of-type {
+	padding-right:0;
+}
+
+#main_block header {
+
+	font-size:20px;
+	
+	font-weight:bold;
+	
+	margin-left:40px;
+	
+	margin-top:20px;
+	
+}
+
+
+
+#content input {
+	margin-left:40px;
+	margin-top:10px;
+}
+
+#content a:first-of-type {
+
+	display:inline-block;
+	
+	margin-left:40px;
+	
+	margin-right:20px;
+	
+	margin-top:10px;
+	
+}
+
+

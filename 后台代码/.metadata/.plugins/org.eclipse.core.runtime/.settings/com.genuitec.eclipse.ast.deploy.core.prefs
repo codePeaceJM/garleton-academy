@@ -1,0 +1,13 @@
+#Fri Apr 22 12:11:42 CST 2016
+myeclipseTomcatServer.Garleton.altContextRoot=/Garleton
+myeclipseTomcatServer.Garleton.type=WebDeployment
+myeclipseTomcatServer.Garleton.isUptoDate=true
+myeclipseTomcatServer.Garleton.shouldOverwrite=false
+myeclipseTomcatServer.Garleton.deploymentPath=C\:\\Users\\Administrator\\Workspaces\\GarletonAcademy\\\u540E\u53F0\u4EE3\u7801\\.metadata\\.me_tcat\\webapps\\Garleton
+myeclipseTomcatServer.Garleton.shouldBackup=false
+myeclipseTomcatServer.Garleton.isExploded=true
+myeclipseTomcatServer.Garleton.IEARProjectName=
+myeclipseTomcatServer.Garleton.isDeployed=true
+eclipse.preferences.version=1
+myeclipseTomcatServer.Garleton.contextRoot=/Garleton
+myeclipseTomcatServer.Garleton.deployIsOverProject=false

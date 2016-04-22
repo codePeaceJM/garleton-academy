@@ -95,7 +95,7 @@ public class ColumnAction extends ActionSupport implements SessionAware,
 	}
 
 	public void add() {
-		System.out.println("hello");
+		// System.out.println("hello");
 		HttpServletResponse response = (HttpServletResponse) ActionContext
 				.getContext().get(ServletActionContext.HTTP_RESPONSE);
 		response.setCharacterEncoding("UTF-8");
@@ -175,13 +175,32 @@ public class ColumnAction extends ActionSupport implements SessionAware,
 		}
 	}
 
-	public String update() {
-
+	public void update() {
+		System.out.println("UPDATE");
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		column.setPublisher((String) session.get("name"));
+		int index = fileFileName.lastIndexOf(".");
+		String extension = fileFileName.substring(index);
+		column.setIcon(fileService.upload(file, "/icon", extension));
 		if (columnService.update(column)) {
 			logService.add((Integer) session.get("id"), 3, "column");
-			return "update_column_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			return "update_column_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

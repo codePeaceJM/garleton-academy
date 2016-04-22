@@ -51,6 +51,9 @@ public class ColumnServiceImpl implements ColumnService {
 	public boolean update(Column c) {
 		// TODO Auto-generated method stub
 		try{
+			Date date=new Date();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			c.setPublishtime(sdf.format(date));
 			columnDAO.update(c);
 		}catch(Exception e){
 			return false;

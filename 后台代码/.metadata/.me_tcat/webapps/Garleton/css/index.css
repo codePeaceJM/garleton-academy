@@ -1,0 +1,199 @@
+/* css style reset */
+* {
+	padding:0;
+	margin:0;
+}
+
+body {
+	
+	background:#F0E68C;
+
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+ul{
+	list-style: none;
+}
+
+/* end css style reset */
+
+
+/* header style set */
+
+#header {
+	
+	width:100%;
+	height:480px;
+	
+} 
+
+#top_info{
+	
+}
+
+#carousel {
+	width:100%;
+	height:350px;
+	overflow:hidden;
+}
+
+#carousel img {
+	display:block;
+	height:350px;
+	width:1350px;
+}
+
+/* nav style set */
+
+#nav_bar {
+	height:84px;
+	width:auto;
+	padding-left:8%;
+	padding-right:8%;
+	
+	margin:0 auto;
+}
+
+#nav_bar:after {
+	visibility:hidden;
+	content:"";
+	display:block;
+	clear:both;
+	line-height:0;
+	height:0;
+}
+
+
+#logo {
+	padding-left:24px;
+	line-height: 84px;
+	font-size:24px;
+	font-style:italic;
+	font-family:sans-serif;
+	font-color:red;
+	font-weight:bold;
+	
+}
+
+#logo {
+	display:block;
+	float:left;
+	width:22%;
+	cursor:pointer;
+}
+
+#nav_bar .sign  {
+	padding-top:32px;
+	float:right;
+	font-size:18px;
+	line-height: 24px;
+}
+
+#nav_bar .sign li {
+	float:left;
+	padding-left:20px;
+}
+
+#nav_bar .sign input{
+	display:inline-block;
+	height:1em;
+	width:100%;
+	border:none;
+	
+}
+#nav_bar .sign input:focus {
+	outline:none;
+}
+
+#nav_bar .sign li ul li{
+	width:150%;
+}
+
+#log_out{
+
+	padding-right:30px;
+	
+}
+/* end nav style set */
+
+
+	
+
+/* end header style set */
+
+/* the wrapper of article and aside */
+
+#wrapper {
+
+	width:1150px;
+	margin:0 auto;
+	overflow: hidden;
+}
+
+/* article style set */
+article {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	
+	width:75%;
+
+	margin-top:30px;
+	float:left;
+
+}
+
+
+
+
+/* end article style set */
+
+/* aside style set */
+
+aside{
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	
+	height:300px;
+	width:25%;
+	margin-top:30px;
+
+	float:right;
+}
+
+
+/* end aside style set */
+
+
+/* end the wrapper of article and aside */
+
+/* footer style set */
+
+footer {
+	width:100%;
+	border-top:1px solid gray;
+}
+
+#footer_info {
+	
+	width:1150px;
+	margin:0 auto;
+	overflow: hidden;
+
+}
+
+#footer_info address {
+	float:left;
+	padding-top:30px;
+	padding-bottom:30px;
+}
+
+/* end footer style set */
