@@ -451,6 +451,8 @@
 								type:"post",
 								url:"columnAction!search",
 								async:true,
+								processData:false,
+								contentType:false,
 								data:formData,
 								dataType:"json",
 								success:function(data){
