@@ -29,16 +29,7 @@
 		</action>
 		<action name="institutionAction" class="institutionAction" />
 		<action name="columnAction" class="columnAction" />
-		<action name="newsAction" class="newsAction">
-			<result name="add_news_success">/index.jsp</result>
-			<result name="add_news_fail">/index.jsp</result>
-			<result name="del_news_success">/index.jsp</result>
-			<result name="del_news_fail">/index.jsp</result>
-			<result name="search_news_success">/index.jsp</result>
-			<result name="search_news_fail">/index.jsp</result>
-			<result name="update_news_success">/index.jsp</result>
-			<result name="update_news_fail">/index.jsp</result>
-		</action>
+		<action name="newsAction" class="newsAction" />
 		<action name="commentAction" class="commentAction">
 			<result name="add_comment_success">/index.jsp</result>
 			<result name="add_comment_fail">/index.jsp</result>

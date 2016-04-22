@@ -9,6 +9,8 @@ public interface NewsService {
 	public boolean del(int id);
 	public boolean update(News n);
 	public ArrayList<News> searchAll();
-	public ArrayList<News> search(String title);
-
+	public ArrayList<News> searchByTitle(String title);
+	public ArrayList<News> searchNotice();
+	public ArrayList<News> searchArticle();
+	public ArrayList<News> searchPicture();
 }

@@ -157,15 +157,121 @@ public class NewsAction extends ActionSupport implements SessionAware,
 
 	}
 
-	public void search() {
+	public void searchAll() {
 		HttpServletResponse response = (HttpServletResponse) ActionContext
 				.getContext().get(ServletActionContext.HTTP_RESPONSE);
 		response.setCharacterEncoding("UTF-8");
-		if ("".equals(news.getTitle()) || news.getTitle() == null) {
-			newsList = newsService.searchAll();
+		newsList = newsService.searchAll();
+		if (newsList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			newsList = newsService.search(news.getTitle());
+			JSONArray jsonArray = JSONArray.fromObject(newsList);
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	}
+
+	public void searchByTitle() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		newsList = newsService.searchByTitle(news.getTitle());
+
+		if (newsList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(newsList);
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void searchNotice() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		newsList = (ArrayList<News>) newsService.searchNotice().subList(0, 1);
+
+		if (newsList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(newsList);
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void searchArticle() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		Integer tag;
+		newsList = (ArrayList<News>) newsService.searchArticle();
+		if (session.containsKey("articleTag")) {
+			tag = (Integer) session.get("articleTag");
+		} else {
+			tag = 0;
+		}
+
+		newsList = (ArrayList<News>) newsService.searchArticle().subList(tag,
+				tag + 20);
+
+		session.put("articleTag", tag);
+		if (newsList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(newsList);
+			try {
+				response.getWriter().print(jsonArray);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void searchPicture() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		newsList = (ArrayList<News>) newsService.searchPicture().subList(0, 5);
+
 		if (newsList.isEmpty()) {
 			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
 			try {

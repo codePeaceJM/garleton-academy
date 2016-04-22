@@ -58,7 +58,7 @@ public class NewsServiceImpl implements NewsService {
 		return newsList=(ArrayList<News>) newsDAO.findAll();
 	}
 	
-	public ArrayList<News> search(String title) {
+	public ArrayList<News> searchByTitle(String title) {
 		// TODO Auto-generated method stub
 		return newsList=(ArrayList<News>) newsDAO.findByTitle(title);
 	
@@ -76,6 +76,22 @@ public class NewsServiceImpl implements NewsService {
 		return true;
 
 
+	}
+
+	public ArrayList<News> searchArticle() {
+		// TODO Auto-generated method stub
+		newsList=(ArrayList<News>) newsDAO.findByNewstype("article");
+		return newsList;
+	}
+
+	public ArrayList<News> searchNotice() {
+		// TODO Auto-generated method stub
+		return (ArrayList<News>) newsDAO.findByNewstype("notice");
+	}
+
+	public ArrayList<News> searchPicture() {
+		// TODO Auto-generated method stub
+		return (ArrayList<News>) newsDAO.findByPicture();
 	}
 
 }
