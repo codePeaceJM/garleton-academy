@@ -258,7 +258,7 @@
 									formData.append(ele.name,ele.value);
 									
 								}else{
-									if(ele.files==null){
+									if(ele.files.length==0){
 										alert("请输入完整");
 										isOut = true;
 										return false;
@@ -281,7 +281,6 @@
 								data:formData,
 								dataType:"json",
 								processData: false,
-						        contentType: false,
 								success:function(data){
 									if(data.text!="success"){
 										alert("添加栏目失败");
@@ -526,6 +525,7 @@
 															(function(i){
 																
 																var display =null;
+																var parent =$(that).parent();
 																
 																var name = $("<input>",{"name":"name","type":"text","placeholder":"name"}).val(data[i].name);
 																var institution = $("<input>",{"name":"institute","type":"text","placeholder":"institution"}).val(data[i].institution);
@@ -547,7 +547,6 @@
 																			var i=0;
 																			if($(ele).attr("type")!="file"){
 																				
-																				console.log("input"+(i++));
 																				if(ele.value==""){
 																					alert("请输入完整");
 																					
@@ -557,7 +556,7 @@
 																				formData.append(ele.name,ele.value);
 																				
 																			}else{
-																				if(ele.files==null){
+																				if(ele.files.length==0){
 																					alert("请输入完整");
 																					isOut = true;
 																					return false;
@@ -580,7 +579,6 @@
 																			data:formData,
 																			dataType:"json",
 																			processData: false,
-																	        contentType: false,
 																			success:function(data){
 																				if(data.text!="success"){
 																					alert("修改栏目失败");
@@ -604,12 +602,14 @@
 																	click:function(e){
 																		e.preventDefault();
 																		
+																		parent.empty().append(display);
 																		
 																	}
 																}).text("取消");
 
-																
-																$(that).parent().empty().append(name)
+																display = parent.children().detach();
+
+																parent.append(name)
 																	.append(institution)
 																	.append(description)
 																	.append(keyword)
