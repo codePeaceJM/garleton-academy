@@ -175,13 +175,13 @@
 								data:dataList,
 								dataType:"json",
 								success:function(data){
-									if(data.text!="success"){
+									if(data.text=="failed"){
 										alert(actionInfo.header+"失败");
 										$("#content input").each(function(index,ele){
 											ele.val("");
 										});									
 									}else{
-										successFunc(data.list);
+										successFunc(data);
 									}
 								},
 							});
@@ -209,7 +209,7 @@
 
 			columnAction:function(){
 				this.addColumn();
-				this.deleteColumn();
+				// this.deleteColumn();
 				this.queryColumn();
 			},
 			addColumn:function(){
@@ -281,6 +281,7 @@
 								data:formData,
 								dataType:"json",
 								processData: false,
+								contentType:false,
 								success:function(data){
 									if(data.text!="success"){
 										alert("添加栏目失败");
@@ -321,90 +322,90 @@
 					this.isPresent = false;	
 				});				
 			},
-			deleteColumn:function(){
+			// deleteColumn:function(){
 
-				var that = this;
-				$("#columnAction .delete").click(function(e){
-					e.preventDefault();
+			// 	var that = this;
+			// 	$("#columnAction .delete").click(function(e){
+			// 		e.preventDefault();
 
-					if(that.isPresent){
-						that.present = $("#content").detach();
+			// 		if(that.isPresent){
+			// 			that.present = $("#content").detach();
 
-					}else{
-						$("#content").remove();
-					}
+			// 		}else{
+			// 			$("#content").remove();
+			// 		}
 
-					var content = $("<div>",{
-						id:"content"
-					});
+			// 		var content = $("<div>",{
+			// 			id:"content"
+			// 		});
 
 					
-					$("#main_block header").html("删除栏目：").after(content);
+			// 		$("#main_block header").html("删除栏目：").after(content);
 
-					var id = $("<input>",{"name":"id","type":"text","placeholder":"id"});
+			// 		var id = $("<input>",{"name":"id","type":"text","placeholder":"id"});
 					
-					var submit = $("<a>",{
-						href:"#",
-						"class":"submit",
-						click:function(e){
-							var isOut = false;
-							var arr= [];
-							e.preventDefault();
-							$("#content input").each(function(index,ele){
-								if(ele.value==""){
-									alert("请输入完整");
-									isOut = true;
-									return false;
-								}
-								arr.push(ele.name+"="+ele.value);
+			// 		var submit = $("<a>",{
+			// 			href:"#",
+			// 			"class":"submit",
+			// 			click:function(e){
+			// 				var isOut = false;
+			// 				var arr= [];
+			// 				e.preventDefault();
+			// 				$("#content input").each(function(index,ele){
+			// 					if(ele.value==""){
+			// 						alert("请输入完整");
+			// 						isOut = true;
+			// 						return false;
+			// 					}
+			// 					arr.push(ele.name+"="+ele.value);
 								
-							});
-							if(isOut){
-								return;
-							}
-							var dataList = arr.join("&");
-							$.ajax({
-								type:"post",
-								url:"",
-								async:true,
-								data:dataList,
-								dataType:"json",
-								success:function(data){
-									if(data.text!="success"){
-										alert("删除栏目失败");
-										$("#content input").each(function(index,ele){
-											ele.val("");
-										});									
-									}else{
-										alert("删除栏目成功");
-										$("#content input").each(function(index,ele){
-											ele.val("");
-										});	
-									}
-								},
-							});
+			// 				});
+			// 				if(isOut){
+			// 					return;
+			// 				}
+			// 				var dataList = arr.join("&");
+			// 				$.ajax({
+			// 					type:"post",
+			// 					url:"",
+			// 					async:true,
+			// 					data:dataList,
+			// 					dataType:"json",
+			// 					success:function(data){
+			// 						if(data.text!="success"){
+			// 							alert("删除栏目失败");
+			// 							$("#content input").each(function(index,ele){
+			// 								ele.val("");
+			// 							});									
+			// 						}else{
+			// 							alert("删除栏目成功");
+			// 							$("#content input").each(function(index,ele){
+			// 								ele.val("");
+			// 							});	
+			// 						}
+			// 					},
+			// 				});
 							
-						},
-					}).text("提交");
-					var cancel = $("<a>",{
-						href:"#",
-						"class":"cancel",
-						click:function(e){
-							e.preventDefault();
+			// 			},
+			// 		}).text("提交");
+			// 		var cancel = $("<a>",{
+			// 			href:"#",
+			// 			"class":"cancel",
+			// 			click:function(e){
+			// 				e.preventDefault();
 							
-							$("#content").remove();
-							$("#main_block header").after(that.present).text("");
-						}
-					}).text("取消");
+			// 				$("#content").remove();
+			// 				$("#main_block header").after(that.present).text("");
+			// 			}
+			// 		}).text("取消");
 
 					
-					$("#content").append(id)
-						.append(submit)
-						.append(cancel);
+			// 		$("#content").append(id)
+			// 			.append(submit)
+			// 			.append(cancel);
 
-					this.isPresent = false;	
-				});
-			},
+			// 		this.isPresent = false;	
+			// 	});
+			// },
 			queryColumn:function(){
 				var that = this;
 				$("#columnAction .query").click(function(e){
@@ -431,7 +432,7 @@
 						"class":"submit",
 						click:function(e){
 							var isOut = false;
-							var arr= [];
+							var formData = new FormData();
 							e.preventDefault();
 							$("#content input").each(function(index,ele){
 								if(ele.value==""){
@@ -439,18 +440,18 @@
 									isOut = true;
 									return false;
 								}
-								arr.push(ele.name+"="+ele.value);
+								formData.append(ele.name,ele.value);
 								
 							});
 							if(isOut){
 								return;
 							}
-							var dataList = arr.join("&");
+
 							$.ajax({
 								type:"post",
 								url:"columnAction!search",
 								async:true,
-								data:dataList,
+								data:formData,
 								dataType:"json",
 								success:function(data){
 									if(data.text=="failed"){
