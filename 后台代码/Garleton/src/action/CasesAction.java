@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,7 +21,8 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Cases;
 
-public class CasesAction extends ActionSupport implements SessionAware,ModelDriven<Cases> {
+public class CasesAction extends ActionSupport implements SessionAware,
+		ModelDriven<Cases> {
 	LogService logService;
 	CasesService casesService;
 	private Cases cases = new Cases();
@@ -59,44 +61,79 @@ public class CasesAction extends ActionSupport implements SessionAware,ModelDriv
 		this.cases = cases;
 	}
 
-	public String add() {
+	public void add() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if (casesService.add(cases)) {
 			logService.add((Integer) session.get("id"), 1, "cases");
-			return "add_cases_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			return "add_cases_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public String del() {
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if (casesService.del(cases.getId())) {
 			logService.add((Integer) session.get("id"), 2, "cases");
-			return "del_cases_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			return "del_cases_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public String search() {
+	public void search() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if ("".equals(cases.getLaber()) || cases.getLaber() == null) {
 			casesList = casesService.searchAll();
 		} else {
 			casesList = casesService.search(cases.getLaber());
 		}
 		if (casesList.isEmpty()) {
-			return "search_cases_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			JSONArray jsonArray = JSONArray.fromObject(casesList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext
-					.getContext().get(ServletActionContext.HTTP_RESPONSE);
-			response.setCharacterEncoding("UTF-8");
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_cases_success";
 		}
 	}
 

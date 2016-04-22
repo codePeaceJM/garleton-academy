@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,7 +21,8 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Resource;
 
-public class ResourceAction extends ActionSupport implements SessionAware,ModelDriven<Resource>{
+public class ResourceAction extends ActionSupport implements SessionAware,
+		ModelDriven<Resource> {
 	ResourceService resourceService;
 	private Map<String, Object> session;
 	LogService logService;
@@ -58,74 +60,120 @@ public class ResourceAction extends ActionSupport implements SessionAware,ModelD
 	public void setResourceList(ArrayList<Resource> resourceList) {
 		this.resourceList = resourceList;
 	}
-	public String add(){
-		
-		if(resourceService.add(resource)){
+
+	public void add() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (resourceService.add(resource)) {
 			logService.add((Integer) session.get("id"), 1, "resource");
-			return "add_resource_success";
-			
-		}else{
-			return "add_resource_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	public String del(){
-		if(resourceService.del(resource.getId())){
+
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (resourceService.del(resource.getId())) {
 			logService.add((Integer) session.get("id"), 2, "resource");
-			return "del_resource_success";
-			
-		}else{
-			return "del_resource_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+
 	}
-	public String searchByName(){
-		if("".equals(resource.getName())||resource.getName()==null){
-			resourceList=resourceService.searchAll();
-			
-		}else{
-			resourceList=resourceService.searchByName(resource.getName());
+
+	public void searchByName() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if ("".equals(resource.getName()) || resource.getName() == null) {
+			resourceList = resourceService.searchAll();
+
+		} else {
+			resourceList = resourceService.searchByName(resource.getName());
 		}
-		if(resourceList.isEmpty()){
-			return "search_resource_fail";
-			
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(resourceList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		if (resourceList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(resourceList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_resource_success";
 		}
-		
-	}public String searchByType(){
-		if("".equals(resource.getName())||resource.getName()==null){
-			resourceList=resourceService.searchAll();
-			
-		}else{
-			resourceList=resourceService.searchByType(resource.getType());
+
+	}
+
+	public void searchByType() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if ("".equals(resource.getName()) || resource.getName() == null) {
+			resourceList = resourceService.searchAll();
+
+		} else {
+			resourceList = resourceService.searchByType(resource.getType());
 		}
-		if(resourceList.isEmpty()){
-			return "search_resource_fail";
-			
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(resourceList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		if (resourceList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(resourceList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_resource_success";
 		}
-		
+
 	}
-	public String searchBySource(){
+
+	public void searchBySource(){
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+		.getContext().get(ServletActionContext.HTTP_RESPONSE);
+response.setCharacterEncoding("UTF-8");
 		if("".equals(resource.getName())||resource.getName()==null){
 			resourceList=resourceService.searchAll();
 			
@@ -134,19 +182,21 @@ public class ResourceAction extends ActionSupport implements SessionAware,ModelD
 		}
 		
 		if(resourceList.isEmpty()){
-			return "search_resource_fail";
-			
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(resourceList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(resourceList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_resource_success";
 		}
 	}
 
@@ -154,6 +204,7 @@ public class ResourceAction extends ActionSupport implements SessionAware,ModelD
 		// TODO Auto-generated method stub
 		return resource;
 	}
+
 	public Map<String, Object> getSession() {
 		return session;
 	}
@@ -162,6 +213,5 @@ public class ResourceAction extends ActionSupport implements SessionAware,ModelD
 		// TODO Auto-generated method stub
 		this.session = session;
 	}
-
 
 }

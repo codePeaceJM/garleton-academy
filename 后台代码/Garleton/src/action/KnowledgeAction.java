@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,8 +21,9 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Knowledge;
 
-public class KnowledgeAction extends ActionSupport implements SessionAware,ModelDriven<Knowledge>{
-	
+public class KnowledgeAction extends ActionSupport implements SessionAware,
+		ModelDriven<Knowledge> {
+
 	private Knowledge knowledge = new Knowledge();
 	private Map<String, Object> session;
 	LogService logService;
@@ -52,7 +54,6 @@ public class KnowledgeAction extends ActionSupport implements SessionAware,Model
 		this.knowledgeService = knowledgeService;
 	}
 
-	
 	public ArrayList<Knowledge> getKnowledgeList() {
 		return knowledgeList;
 	}
@@ -61,42 +62,79 @@ public class KnowledgeAction extends ActionSupport implements SessionAware,Model
 		this.knowledgeList = knowledgeList;
 	}
 
-	public String add(){
-		if(knowledgeService.add(knowledge)){
+	public void add() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (knowledgeService.add(knowledge)) {
 			logService.add((Integer) session.get("id"), 1, "knowledge");
-			return "add_knowledge_success";
-		}else{
-			return "add_knowledge_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	public String del(){
-		if(knowledgeService.del(knowledge.getId())){
+
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (knowledgeService.del(knowledge.getId())) {
 			logService.add((Integer) session.get("id"), 2, "knowledge");
-			return "del_knowledge_success";
-		}else{
-			return "del_knowledge_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	public String search(){
-		if("".equals(knowledge.getName())||knowledge.getName()==null){
-			knowledgeList=knowledgeService.searchAll();
-		}else{
-			knowledgeList=knowledgeService.search(knowledge.getName());
+
+	public void search() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if ("".equals(knowledge.getName()) || knowledge.getName() == null) {
+			knowledgeList = knowledgeService.searchAll();
+		} else {
+			knowledgeList = knowledgeService.search(knowledge.getName());
 		}
-		if(knowledgeList.isEmpty()){
-			return "search_knowledge_fail";
-			
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(knowledgeList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		if (knowledgeList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(knowledgeList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_knowledge_success";
 		}
 	}
 
@@ -104,6 +142,7 @@ public class KnowledgeAction extends ActionSupport implements SessionAware,Model
 		// TODO Auto-generated method stub
 		return knowledge;
 	}
+
 	public Map<String, Object> getSession() {
 		return session;
 	}

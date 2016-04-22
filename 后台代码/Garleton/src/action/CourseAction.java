@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,11 +21,12 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Course;
 
-public class CourseAction extends ActionSupport implements SessionAware,ModelDriven<Course>{
+public class CourseAction extends ActionSupport implements SessionAware,
+		ModelDriven<Course> {
 	LogService logService;
 	CourseService courseService;
 	ArrayList<Course> courseList;
-	private Course course = new Course();	
+	private Course course = new Course();
 	private Map<String, Object> session;
 
 	public LogService getLogService() {
@@ -58,60 +60,108 @@ public class CourseAction extends ActionSupport implements SessionAware,ModelDri
 	public void setCourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
 	}
-	
-	public String add(){
-		if(courseService.add(course)){
+
+	public void add() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (courseService.add(course)) {
 			logService.add((Integer) session.get("id"), 1, "course");
-			return "add_course_success";
-			
-		}else{
-			return "add_course_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+
 	}
-	
-	public String del(){
-		if(courseService.del(course.getId())){
+
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (courseService.del(course.getId())) {
 			logService.add((Integer) session.get("id"), 2, "course");
-			return "del_course_success";
-			
-		}else{
-			return "del_course_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	public String update(){
-		if(courseService.update(course)){
+
+	public void update() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (courseService.update(course)) {
 			logService.add((Integer) session.get("id"), 3, "course");
-			return "update_course_success";
-			
-		}else{
-			return "update_course_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	public String search(){
-		if("".equals(course.getName())||course.getName()==null){
-			courseList=courseService.searchAll();
-			
-		}else{
-			courseList=courseService.search(course.getName());
+
+	public void search() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if ("".equals(course.getName()) || course.getName() == null) {
+			courseList = courseService.searchAll();
+
+		} else {
+			courseList = courseService.search(course.getName());
 		}
-		if(courseList.isEmpty()){
-			return "search_course_fail";
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(courseList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		if (courseList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(courseList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_course_success";
 		}
-		
+
 	}
 
 	public Course getModel() {

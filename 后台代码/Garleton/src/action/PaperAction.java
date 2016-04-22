@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -18,17 +19,16 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-
 import entity.Paper;
 
-public class PaperAction extends ActionSupport implements SessionAware,ModelDriven<Paper> {
+public class PaperAction extends ActionSupport implements SessionAware,
+		ModelDriven<Paper> {
 	private Paper paper = new Paper();
-	private Map<String , Object> session;
+	private Map<String, Object> session;
 	PaperService paperService;
 	LogService logService;
 	private ArrayList<Paper> paperList;
 
-	
 	public LogService getLogService() {
 		return logService;
 	}
@@ -61,111 +61,168 @@ public class PaperAction extends ActionSupport implements SessionAware,ModelDriv
 		this.paperList = paperList;
 	}
 
-	public String add() {
+	public void add() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if (paperService.add(paper)) {
 			logService.add((Integer) session.get("id"), 1, "paper");
-			return "add_paper_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			return "add_paper_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public String del() {
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if (paperService.del(paper.getId())) {
-			logService.add((Integer) session.get("id"),2, "paper");
-			return "del_paper_success";
-
+			logService.add((Integer) session.get("id"), 2, "paper");
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			return "del_paper_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public String update() {
+	public void update() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if (paperService.update(paper)) {
 			logService.add((Integer) session.get("id"), 3, "paper");
-			return "update_paper_success";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			return "update_paper_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
 
-	public String searchByCourseName() {
+	public void searchByCourseName() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if ("".equals(paper.getCoursename()) || paper.getCoursename() == null) {
 			paperList = paperService.searchAll();
 		} else {
 			paperList = paperService.searchByCourseName(paper.getCoursename());
-		}		
-		
+		}
+
 		if (paperList.isEmpty()) {
-			return "search_paper_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			JSONArray jsonArray = JSONArray.fromObject(paperList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext
-					.getContext().get(ServletActionContext.HTTP_RESPONSE);
-			response.setCharacterEncoding("UTF-8");
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_paper_success";
 		}
-		
-		
+
 	}
-	public String searchByTitle() {
+
+	public void searchByTitle() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if ("".equals(paper.getCoursename()) || paper.getCoursename() == null) {
 			paperList = paperService.searchAll();
 		} else {
 			paperList = paperService.searchByTitle(paper.getTitle());
-		}		
-		
+		}
+
 		if (paperList.isEmpty()) {
-			return "search_paper_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			JSONArray jsonArray = JSONArray.fromObject(paperList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext
-					.getContext().get(ServletActionContext.HTTP_RESPONSE);
-			response.setCharacterEncoding("UTF-8");
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_paper_success";
 		}
-		
-		
+
 	}
-	public String searchByType() {
+
+	public void searchByType() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
 		if ("".equals(paper.getCoursename()) || paper.getCoursename() == null) {
 			paperList = paperService.searchAll();
 		} else {
 			paperList = paperService.searchByType(paper.getType());
-		}		
-		
+		}
+
 		if (paperList.isEmpty()) {
-			return "search_paper_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			JSONArray jsonArray = JSONArray.fromObject(paperList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext
-					.getContext().get(ServletActionContext.HTTP_RESPONSE);
-			response.setCharacterEncoding("UTF-8");
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_paper_success";
 		}
-		
-		
-	}
 
+	}
 
 	public Paper getModel() {
 		// TODO Auto-generated method stub

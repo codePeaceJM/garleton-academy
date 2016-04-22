@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,13 +21,14 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import entity.Statute;
 
-public class StatuteAction extends ActionSupport implements SessionAware,ModelDriven<Statute>{
+public class StatuteAction extends ActionSupport implements SessionAware,
+		ModelDriven<Statute> {
 	private Statute statute = new Statute();
 	private Map<String, Object> session;
 	LogService logService;
 	ArrayList<Statute> statuteList;
 	StatuteService statuteService;
-	
+
 	public LogService getLogService() {
 		return logService;
 	}
@@ -35,43 +37,79 @@ public class StatuteAction extends ActionSupport implements SessionAware,ModelDr
 		this.logService = logService;
 	}
 
-	public String add(){
-		if(statuteService.add(statute)){
+	public void add() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (statuteService.add(statute)) {
 			logService.add((Integer) session.get("id"), 1, "statute");
-			return "add_statute_success";
-		}else{
-			return "add_statute_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	public String del(){
-		if(statuteService.del(statute.getId())){
+
+	public void del() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if (statuteService.del(statute.getId())) {
 			logService.add((Integer) session.get("id"), 2, "statute");
-			return "del_statute_success";
-		}else{
-			return "del_statute_fail";
+			JSONObject jobject = JSONObject.fromObject("{text:'success'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	public String search(){
-		if("".equals(statute.getName())||statute.getName()==null){
-			statuteList=statuteService.searchAll();
-		}else{
-			statuteList=statuteService.search(statute.getName());
+
+	public void search() {
+		HttpServletResponse response = (HttpServletResponse) ActionContext
+				.getContext().get(ServletActionContext.HTTP_RESPONSE);
+		response.setCharacterEncoding("UTF-8");
+		if ("".equals(statute.getName()) || statute.getName() == null) {
+			statuteList = statuteService.searchAll();
+		} else {
+			statuteList = statuteService.search(statute.getName());
 		}
-		if(statuteList.isEmpty()){
-			return "search_statute_fail";
-		}else{
-			JSONArray jsonArray =  JSONArray.fromObject(statuteList);
-			HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
-			response.setCharacterEncoding("UTF-8"); 
+		if (statuteList.isEmpty()) {
+			JSONObject jobject = JSONObject.fromObject("{text:'failed'}");
+			try {
+				response.getWriter().print(jobject);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			JSONArray jsonArray = JSONArray.fromObject(statuteList);
 			try {
 				response.getWriter().print(jsonArray);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "search_statute_success";
 		}
 	}
 
@@ -103,6 +141,7 @@ public class StatuteAction extends ActionSupport implements SessionAware,ModelDr
 		// TODO Auto-generated method stub
 		return statute;
 	}
+
 	public Map<String, Object> getSession() {
 		return session;
 	}
